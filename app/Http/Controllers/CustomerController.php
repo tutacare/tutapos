@@ -33,7 +33,14 @@ class CustomerController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		if (Auth::check())
+		{
+			return view('customer.create');
+		} 
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
