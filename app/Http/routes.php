@@ -22,3 +22,4 @@ Route::controllers([
 
 Route::resource('customers', 'CustomerController');
 Route::resource('items', 'ItemController');
+Route::resource('suppliers', 'SupplierController');
