@@ -2,7 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Item;
+use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller {
@@ -14,7 +15,15 @@ class ItemController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		if (Auth::check())
+		{
+			$items = Item::all();
+			return view('item.index')->with('item', $items);
+		} 
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -24,7 +33,14 @@ class ItemController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		if (Auth::check())
+		{
+			return view('item.create');
+		} 
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
