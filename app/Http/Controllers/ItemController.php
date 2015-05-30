@@ -101,7 +101,16 @@ class ItemController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$items = Item::find($id);
+	        return view('item.edit')
+	            ->with('item', $items);
+        }
+        else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -112,7 +121,36 @@ class ItemController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		if (Auth::check())
+		{
+				$rules = array(
+	            'item_name' => 'required',
+	            'cost_price' => 'required',
+	            'selling_price' => 'required',
+	        );
+	        $validator = Validator::make(Input::all(), $rules);
+	        if ($validator->fails()) {
+	            return Redirect::to('items/' . $id . '/edit')
+	                ->withErrors($validator);
+	        } else {
+	            $items = Item::find($id);
+	            $items->upc_ean_isbn = Input::get('upc_ean_isbn');
+	            $items->item_name = Input::get('item_name');
+	            $items->size = Input::get('size');
+	            $items->description = Input::get('description');
+	            $items->cost_price = Input::get('cost_price');
+	            $items->selling_price = Input::get('selling_price');
+	            $items->quantity = Input::get('quantity');
+	            $items->save();
+
+	            Session::flash('message', 'You have successfully updated item');
+	            return Redirect::to('items');
+	        }
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -123,7 +161,18 @@ class ItemController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$items = Item::find($id);
+	        $items->delete();
+
+	        Session::flash('message', 'You have successfully deleted item');
+	        return Redirect::to('items');
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 }
