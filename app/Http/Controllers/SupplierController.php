@@ -50,7 +50,37 @@ class SupplierController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		if (Auth::check())
+		{
+			$rules = array(
+	            'company_name' => 'required',
+	        );
+	        $validator = Validator::make(Input::all(), $rules);
+	        if ($validator->fails()) {
+	            return Redirect::to('suppliers/create')
+	                ->withErrors($validator);
+	        } else {
+	            $suppliers = new Supplier;
+	            $suppliers->company_name = Input::get('company_name');
+	            $suppliers->name = Input::get('name');
+	            $suppliers->email = Input::get('email');
+	            $suppliers->phone_number = Input::get('phone_number');
+	            $suppliers->address = Input::get('address');
+	            $suppliers->city = Input::get('city');
+	            $suppliers->state = Input::get('state');
+	            $suppliers->zip = Input::get('zip');
+	            $suppliers->comments = Input::get('comments');
+	            $suppliers->account = Input::get('account');
+	            $suppliers->save();
+
+	            Session::flash('message', 'You have successfully added supplier');
+	            return Redirect::to('suppliers');
+	        }
+	    }
+    	else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -72,7 +102,16 @@ class SupplierController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		if (Auth::check())
+		{
+		$suppliers = Supplier::find($id);
+        return view('supplier.edit')
+            ->with('supplier', $suppliers);
+        }
+        else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -83,7 +122,37 @@ class SupplierController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		if (Auth::check())
+		{
+				$rules = array(
+	            'company_name' => 'required',
+	        );
+	        $validator = Validator::make(Input::all(), $rules);
+	        if ($validator->fails()) {
+	            return Redirect::to('suppliers/' . $id . '/edit')
+	                ->withErrors($validator);
+	        } else {
+	            $suppliers = Supplier::find($id);
+	            $suppliers->company_name = Input::get('company_name');
+	            $suppliers->name = Input::get('name');
+	            $suppliers->email = Input::get('email');
+	            $suppliers->phone_number = Input::get('phone_number');
+	            $suppliers->address = Input::get('address');
+	            $suppliers->city = Input::get('city');
+	            $suppliers->state = Input::get('state');
+	            $suppliers->zip = Input::get('zip');
+	            $suppliers->comments = Input::get('comments');
+	            $suppliers->account = Input::get('account');
+	            $suppliers->save();
+
+	            Session::flash('message', 'You have successfully updated supplier');
+	            return Redirect::to('suppliers');
+	        }
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -94,7 +163,18 @@ class SupplierController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$suppliers = Supplier::find($id);
+	        $suppliers->delete();
+
+	        Session::flash('message', 'You have successfully deleted supplier');
+	        return Redirect::to('suppliers');
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 }
