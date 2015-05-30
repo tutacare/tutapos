@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					{!! Html::ul($errors->all()) !!}
 
-					{!! Form::open(array('url' => 'customers')) !!}
+					{!! Form::open(array('url' => 'items')) !!}
 
 					<div class="form-group">
 					{!! Form::label('upc_ean_isbn', 'UPC/EAN/ISBN') !!}

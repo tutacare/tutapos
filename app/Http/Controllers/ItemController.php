@@ -50,7 +50,36 @@ class ItemController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		if (Auth::check())
+		{
+			$rules = array(
+	            'item_name' => 'required',
+	            'cost_price' => 'required',
+	            'selling_price' => 'required',
+	        );
+	        $validator = Validator::make(Input::all(), $rules);
+	        if ($validator->fails()) {
+	            return Redirect::to('items/create')
+	                ->withErrors($validator);
+	        } else {
+	            $items = new Item;
+	            $items->upc_ean_isbn = Input::get('upc_ean_isbn');
+	            $items->item_name = Input::get('item_name');
+	            $items->size = Input::get('size');
+	            $items->description = Input::get('description');
+	            $items->cost_price = Input::get('cost_price');
+	            $items->selling_price = Input::get('selling_price');
+	            $items->quantity = Input::get('quantity');
+	            $items->save();
+
+	            Session::flash('message', 'You have successfully added item');
+	            return Redirect::to('items');
+	        }
+	    }
+    	else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
