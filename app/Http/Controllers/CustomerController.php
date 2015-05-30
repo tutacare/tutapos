@@ -103,7 +103,16 @@ class CustomerController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		if (Auth::check())
+		{
+		$customers = Customer::find($id);
+        return view('customer.edit')
+            ->with('customer', $customers);
+        }
+        else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -114,7 +123,37 @@ class CustomerController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		if (Auth::check())
+		{
+				$rules = array(
+	            'name' => 'required',
+	        );
+	        $validator = Validator::make(Input::all(), $rules);
+	        if ($validator->fails()) {
+	            return Redirect::to('customers/' . $id . '/edit')
+	                ->withErrors($validator);
+	        } else {
+	            // simpan
+	            $customers = Customer::find($id);
+	            $customers->name = Input::get('name');
+	            $customers->email = Input::get('email');
+	            $customers->phone_number = Input::get('phone_number');
+	            $customers->address = Input::get('address');
+	            $customers->city = Input::get('city');
+	            $customers->state = Input::get('state');
+	            $customers->zip = Input::get('zip');
+	            $customers->company_name = Input::get('company_name');
+	            $customers->account = Input::get('account');
+	            $customers->save();
+	            // redirect
+	            Session::flash('message', 'You have successfully updated customer');
+	            return Redirect::to('customers');
+	        }
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -125,7 +164,18 @@ class CustomerController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$customers = Customer::find($id);
+	        $customers->delete();
+	        // redirect
+	        Session::flash('message', 'You have successfully deleted customer');
+	        return Redirect::to('customers');
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 }
