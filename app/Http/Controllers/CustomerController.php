@@ -143,6 +143,20 @@ class CustomerController extends Controller {
 	            $customers->company_name = Input::get('company_name');
 	            $customers->account = Input::get('account');
 	            $customers->save();
+	            // process avatar
+	            $image = $request->file('avatar');
+				if(!empty($image)) {
+					$avatarName = 'cust' . $id . '.' . 
+					$request->file('avatar')->getClientOriginalExtension();
+
+					$request->file('avatar')->move(
+					base_path() . '/public/images/customers/', $avatarName
+					);
+
+					$customerAvatar = Customer::find($id);
+					$customerAvatar->avatar = $avatarName;
+		            $customerAvatar->save();
+	        	}
 	            // redirect
 	            Session::flash('message', 'You have successfully updated customer');
 	            return Redirect::to('customers');

@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					{!! Html::ul($errors->all()) !!}
 
-					{!! Form::model($customer, array('route' => array('customers.update', $customer->id), 'method' => 'PUT')) !!}
+					{!! Form::model($customer, array('route' => array('customers.update', $customer->id), 'method' => 'PUT', 'files' => true)) !!}
 
 					<div class="form-group">
 					{!! Form::label('name', 'Name *') !!}
