@@ -19,6 +19,7 @@ class CreateSuppliersTable extends Migration {
 			$table->string('name', 100);
 			$table->string('email', 30);
 			$table->string('phone_number', 20);
+			$table->string('avatar', 255)->default('no-foto.png');
 			$table->string('address', 255);
 			$table->string('city', 20);
 			$table->string('state', 30);

@@ -28,6 +28,11 @@
 					</div>
 
 					<div class="form-group">
+					{!! Form::label('avatar', 'Choose Avatar') !!}
+					{!! Form::file('avatar', null, array('class' => 'form-control')) !!}
+					</div>
+
+					<div class="form-group">
 					{!! Form::label('addrees', 'Addrees') !!}
 					{!! Form::text('address', null, array('class' => 'form-control')) !!}
 					</div>

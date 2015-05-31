@@ -127,19 +127,11 @@ class CustomerController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(CustomerRequest $request, $id)
 	{
 		if (Auth::check())
 		{
-				$rules = array(
-	            'name' => 'required',
-	        );
-	        $validator = Validator::make(Input::all(), $rules);
-	        if ($validator->fails()) {
-	            return Redirect::to('customers/' . $id . '/edit')
-	                ->withErrors($validator);
-	        } else {
-	            // simpan
+				
 	            $customers = Customer::find($id);
 	            $customers->name = Input::get('name');
 	            $customers->email = Input::get('email');
@@ -154,7 +146,6 @@ class CustomerController extends Controller {
 	            // redirect
 	            Session::flash('message', 'You have successfully updated customer');
 	            return Redirect::to('customers');
-	        }
 		}
 		else
 		{
