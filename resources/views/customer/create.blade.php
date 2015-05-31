@@ -6,11 +6,10 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">New Customer</div>
-
 				<div class="panel-body">
 					{!! Html::ul($errors->all()) !!}
 
-					{!! Form::open(array('url' => 'customers')) !!}
+					{!! Form::open(array('url' => 'customers', 'files' => true)) !!}
 
 					<div class="form-group">
 					{!! Form::label('name', 'Name *') !!}
@@ -25,6 +24,11 @@
 					<div class="form-group">
 					{!! Form::label('phone_number', 'Phone Number') !!}
 					{!! Form::text('phone_number', Input::old('phone_number'), array('class' => 'form-control')) !!}
+					</div>
+
+					<div class="form-group">
+					{!! Form::label('avatar', 'Choose Avatar') !!}
+					{!! Form::file('avatar', Input::old('avatar'), array('class' => 'form-control')) !!}
 					</div>
 
 					<div class="form-group">

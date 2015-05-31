@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Customer;
+use App\Http\Requests\CustomerRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -48,19 +49,11 @@ class CustomerController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CustomerRequest $request)
 	{
 		if (Auth::check())
 		{
-			$rules = array(
-	            'name' => 'required',
-	        );
-	        $validator = Validator::make(Input::all(), $rules);
-	        // process the login
-	        if ($validator->fails()) {
-	            return Redirect::to('customers/create')
-	                ->withErrors($validator);
-	        } else {
+			
 	            // store
 	            $customers = new Customer;
 	            $customers->name = Input::get('name');
@@ -73,10 +66,23 @@ class CustomerController extends Controller {
 	            $customers->company_name = Input::get('company_name');
 	            $customers->account = Input::get('account');
 	            $customers->save();
-	            // redirect
+	            // process avatar
+	            $image = $request->file('avatar');
+				if(!empty($image)) {
+					$avatarName = 'cus' . $customers->id . '.' . 
+					$request->file('avatar')->getClientOriginalExtension();
+
+					$request->file('avatar')->move(
+					base_path() . '/public/images/customers/', $avatarName
+					);
+
+					$customerAvatar = Customer::find($customers->id);
+					$customerAvatar->avatar = $avatarName;
+		            $customerAvatar->save();
+	        	}
 	            Session::flash('message', 'You have successfully added customer');
 	            return Redirect::to('customers');
-	        }
+	        
 	    }
     	else
 		{
