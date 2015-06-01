@@ -25,6 +25,7 @@
             <td>Selling Price</td>
             <td>Quantity</td>
             <td>&nbsp;</td>
+            <td>Avatar</td>
         </tr>
     </thead>
     <tbody>
@@ -46,6 +47,7 @@
                     {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
                 {!! Form::close() !!}
             </td>
+            <td>{!! Html::image(url() . '/images/items/' . $value->avatar, 'a picture', array('class' => 'thumb')) !!}</td>
         </tr>
     @endforeach
     </tbody>

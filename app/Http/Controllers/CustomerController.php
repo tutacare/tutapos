@@ -146,7 +146,7 @@ class CustomerController extends Controller {
 	            // process avatar
 	            $image = $request->file('avatar');
 				if(!empty($image)) {
-					$avatarName = 'cust' . $id . '.' . 
+					$avatarName = 'cus' . $id . '.' . 
 					$request->file('avatar')->getClientOriginalExtension();
 
 					$request->file('avatar')->move(

@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					{!! Html::ul($errors->all()) !!}
 
-					{!! Form::open(array('url' => 'items')) !!}
+					{!! Form::open(array('url' => 'items', 'files' => true)) !!}
 
 					<div class="form-group">
 					{!! Form::label('upc_ean_isbn', 'UPC/EAN/ISBN') !!}
@@ -30,6 +30,11 @@
 					<div class="form-group">
 					{!! Form::label('description', 'Description') !!}
 					{!! Form::textarea('description', Input::old('description'), array('class' => 'form-control')) !!}
+					</div>
+
+					<div class="form-group">
+					{!! Form::label('avatar', 'Choose Avatar') !!}
+					{!! Form::file('avatar', Input::old('avatar'), array('class' => 'form-control')) !!}
 					</div>
 
 					<div class="form-group">

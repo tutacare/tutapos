@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Http\Requests\ItemRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -48,33 +49,35 @@ class ItemController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(ItemRequest $request)
 	{
 		if (Auth::check())
 		{
-			$rules = array(
-	            'item_name' => 'required',
-	            'cost_price' => 'required',
-	            'selling_price' => 'required',
-	        );
-	        $validator = Validator::make(Input::all(), $rules);
-	        if ($validator->fails()) {
-	            return Redirect::to('items/create')
-	                ->withErrors($validator);
-	        } else {
-	            $items = new Item;
-	            $items->upc_ean_isbn = Input::get('upc_ean_isbn');
-	            $items->item_name = Input::get('item_name');
-	            $items->size = Input::get('size');
-	            $items->description = Input::get('description');
-	            $items->cost_price = Input::get('cost_price');
-	            $items->selling_price = Input::get('selling_price');
-	            $items->quantity = Input::get('quantity');
-	            $items->save();
+		    $items = new Item;
+            $items->upc_ean_isbn = Input::get('upc_ean_isbn');
+            $items->item_name = Input::get('item_name');
+            $items->size = Input::get('size');
+            $items->description = Input::get('description');
+            $items->cost_price = Input::get('cost_price');
+            $items->selling_price = Input::get('selling_price');
+            $items->quantity = Input::get('quantity');
+            $items->save();
+            // process avatar
+            $image = $request->file('avatar');
+			if(!empty($image)) {
+				$avatarName = 'item' . $items->id . '.' . 
+				$request->file('avatar')->getClientOriginalExtension();
 
-	            Session::flash('message', 'You have successfully added item');
-	            return Redirect::to('items');
-	        }
+				$request->file('avatar')->move(
+				base_path() . '/public/images/items/', $avatarName
+				);
+
+				$itemAvatar = Item::find($items->id);
+				$itemAvatar->avatar = $avatarName;
+	            $itemAvatar->save();
+        	}
+            Session::flash('message', 'You have successfully added item');
+            return Redirect::to('items');
 	    }
     	else
 		{

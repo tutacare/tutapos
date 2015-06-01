@@ -40,7 +40,7 @@
                     {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
                 {!! Form::close() !!}
             </td>
-            <td>{!! Html::image('http://localhost/tutapos/public/images/customers/' . $value->avatar, 'a picture', array('class' => 'thumb')) !!}</td>
+            <td>{!! Html::image(url() . '/images/customers/' . $value->avatar, 'a picture', array('class' => 'thumb')) !!}</td>
         </tr>
     @endforeach
     </tbody>
