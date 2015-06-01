@@ -122,33 +122,35 @@ class ItemController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(ItemRequest $request, $id)
 	{
 		if (Auth::check())
 		{
-				$rules = array(
-	            'item_name' => 'required',
-	            'cost_price' => 'required',
-	            'selling_price' => 'required',
-	        );
-	        $validator = Validator::make(Input::all(), $rules);
-	        if ($validator->fails()) {
-	            return Redirect::to('items/' . $id . '/edit')
-	                ->withErrors($validator);
-	        } else {
-	            $items = Item::find($id);
-	            $items->upc_ean_isbn = Input::get('upc_ean_isbn');
-	            $items->item_name = Input::get('item_name');
-	            $items->size = Input::get('size');
-	            $items->description = Input::get('description');
-	            $items->cost_price = Input::get('cost_price');
-	            $items->selling_price = Input::get('selling_price');
-	            $items->quantity = Input::get('quantity');
-	            $items->save();
+            $items = Item::find($id);
+            $items->upc_ean_isbn = Input::get('upc_ean_isbn');
+            $items->item_name = Input::get('item_name');
+            $items->size = Input::get('size');
+            $items->description = Input::get('description');
+            $items->cost_price = Input::get('cost_price');
+            $items->selling_price = Input::get('selling_price');
+            $items->quantity = Input::get('quantity');
+            $items->save();
+            // process avatar
+            $image = $request->file('avatar');
+			if(!empty($image)) {
+				$avatarName = 'item' . $id . '.' . 
+				$request->file('avatar')->getClientOriginalExtension();
 
-	            Session::flash('message', 'You have successfully updated item');
-	            return Redirect::to('items');
-	        }
+				$request->file('avatar')->move(
+				base_path() . '/public/images/items/', $avatarName
+				);
+
+				$itemAvatar = Item::find($id);
+				$itemAvatar->avatar = $avatarName;
+	            $itemAvatar->save();
+        	}
+            Session::flash('message', 'You have successfully updated item');
+            return Redirect::to('items');
 		}
 		else
 		{

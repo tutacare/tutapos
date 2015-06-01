@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					{!! Html::ul($errors->all()) !!}
 
-					{!! Form::model($item, array('route' => array('items.update', $item->id), 'method' => 'PUT')) !!}
+					{!! Form::model($item, array('route' => array('items.update', $item->id), 'method' => 'PUT', 'files' => true)) !!}
 
 					<div class="form-group">
 					{!! Form::label('upc_ean_isbn', 'UPC/EAN/ISBN') !!}
@@ -30,6 +30,11 @@
 					<div class="form-group">
 					{!! Form::label('description', 'Description') !!}
 					{!! Form::text('description', null, array('class' => 'form-control')) !!}
+					</div>
+
+					<div class="form-group">
+					{!! Form::label('avatar', 'Choose Avatar') !!}
+					{!! Form::file('avatar', null, array('class' => 'form-control')) !!}
 					</div>
 
 					<div class="form-group">
