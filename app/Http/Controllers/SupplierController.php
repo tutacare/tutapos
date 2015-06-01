@@ -126,18 +126,10 @@ class SupplierController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(SupplierRequest $request, $id)
 	{
 		if (Auth::check())
 		{
-				$rules = array(
-	            'company_name' => 'required',
-	        );
-	        $validator = Validator::make(Input::all(), $rules);
-	        if ($validator->fails()) {
-	            return Redirect::to('suppliers/' . $id . '/edit')
-	                ->withErrors($validator);
-	        } else {
 	            $suppliers = Supplier::find($id);
 	            $suppliers->company_name = Input::get('company_name');
 	            $suppliers->name = Input::get('name');
@@ -150,10 +142,23 @@ class SupplierController extends Controller {
 	            $suppliers->comments = Input::get('comments');
 	            $suppliers->account = Input::get('account');
 	            $suppliers->save();
+	            // process avatar
+	            $image = $request->file('avatar');
+				if(!empty($image)) {
+					$avatarName = 'sup' . $id . '.' . 
+					$request->file('avatar')->getClientOriginalExtension();
+
+					$request->file('avatar')->move(
+					base_path() . '/public/images/suppliers/', $avatarName
+					);
+
+					$supplierAvatar = Supplier::find($id);
+					$supplierAvatar->avatar = $avatarName;
+		            $supplierAvatar->save();
+	        	}
 
 	            Session::flash('message', 'You have successfully updated supplier');
 	            return Redirect::to('suppliers');
-	        }
 		}
 		else
 		{

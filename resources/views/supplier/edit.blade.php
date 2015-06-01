@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					{!! Html::ul($errors->all()) !!}
 
-					{!! Form::model($supplier, array('route' => array('suppliers.update', $supplier->id), 'method' => 'PUT')) !!}
+					{!! Form::model($supplier, array('route' => array('suppliers.update', $supplier->id), 'method' => 'PUT', 'files' => true)) !!}
 
 					<div class="form-group">
 					{!! Form::label('company_name', 'Company Name') !!}
@@ -30,6 +30,11 @@
 					<div class="form-group">
 					{!! Form::label('phone_number', 'Phone Number') !!}
 					{!! Form::text('phone_number', null, array('class' => 'form-control')) !!}
+					</div>
+
+					<div class="form-group">
+					{!! Form::label('avatar', 'Choose Avatar') !!}
+					{!! Form::file('avatar', null, array('class' => 'form-control')) !!}
 					</div>
 
 					<div class="form-group">
