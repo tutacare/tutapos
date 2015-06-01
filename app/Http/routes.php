@@ -22,4 +22,6 @@ Route::controllers([
 
 Route::resource('customers', 'CustomerController');
 Route::resource('items', 'ItemController');
+Route::get('items/{id}/inventory', 'ItemController@inventory');
+
 Route::resource('suppliers', 'SupplierController');

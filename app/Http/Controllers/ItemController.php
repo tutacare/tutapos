@@ -180,4 +180,18 @@ class ItemController extends Controller {
 		}
 	}
 
+	public function inventory($id)
+	{
+		if (Auth::check())
+		{
+			$items = Item::find($id);
+			return view('item.inventory')
+	            ->with('item', $items);
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
+	}
+
 }
