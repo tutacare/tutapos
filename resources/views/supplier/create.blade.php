@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					{!! Html::ul($errors->all()) !!}
 
-					{!! Form::open(array('url' => 'suppliers')) !!}
+					{!! Form::open(array('url' => 'suppliers', 'files' => true)) !!}
 
 					<div class="form-group">
 					{!! Form::label('company_name', 'Company Name *') !!}
@@ -30,6 +30,11 @@
 					<div class="form-group">
 					{!! Form::label('phone_number', 'Phone Number') !!}
 					{!! Form::text('phone_number', Input::old('phone_number'), array('class' => 'form-control')) !!}
+					</div>
+
+					<div class="form-group">
+					{!! Form::label('avatar', 'Choose Avatar') !!}
+					{!! Form::file('avatar', Input::old('avatar'), array('class' => 'form-control')) !!}
 					</div>
 
 					<div class="form-group">

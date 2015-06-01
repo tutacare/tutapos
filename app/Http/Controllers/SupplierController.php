@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Supplier;
+use App\Http\Requests\SupplierRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -48,34 +49,39 @@ class SupplierController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(SupplierRequest $request)
 	{
 		if (Auth::check())
 		{
-			$rules = array(
-	            'company_name' => 'required',
-	        );
-	        $validator = Validator::make(Input::all(), $rules);
-	        if ($validator->fails()) {
-	            return Redirect::to('suppliers/create')
-	                ->withErrors($validator);
-	        } else {
-	            $suppliers = new Supplier;
-	            $suppliers->company_name = Input::get('company_name');
-	            $suppliers->name = Input::get('name');
-	            $suppliers->email = Input::get('email');
-	            $suppliers->phone_number = Input::get('phone_number');
-	            $suppliers->address = Input::get('address');
-	            $suppliers->city = Input::get('city');
-	            $suppliers->state = Input::get('state');
-	            $suppliers->zip = Input::get('zip');
-	            $suppliers->comments = Input::get('comments');
-	            $suppliers->account = Input::get('account');
-	            $suppliers->save();
+            $suppliers = new Supplier;
+            $suppliers->company_name = Input::get('company_name');
+            $suppliers->name = Input::get('name');
+            $suppliers->email = Input::get('email');
+            $suppliers->phone_number = Input::get('phone_number');
+            $suppliers->address = Input::get('address');
+            $suppliers->city = Input::get('city');
+            $suppliers->state = Input::get('state');
+            $suppliers->zip = Input::get('zip');
+            $suppliers->comments = Input::get('comments');
+            $suppliers->account = Input::get('account');
+            $suppliers->save();
+            // process avatar
+	            $image = $request->file('avatar');
+				if(!empty($image)) {
+					$avatarName = 'sup' . $suppliers->id . '.' . 
+					$request->file('avatar')->getClientOriginalExtension();
 
-	            Session::flash('message', 'You have successfully added supplier');
-	            return Redirect::to('suppliers');
-	        }
+					$request->file('avatar')->move(
+					base_path() . '/public/images/suppliers/', $avatarName
+					);
+
+					$supplierAvatar = Supplier::find($suppliers->id);
+					$supplierAvatar->avatar = $avatarName;
+		            $supplierAvatar->save();
+	        	}
+
+            Session::flash('message', 'You have successfully added supplier');
+            return Redirect::to('suppliers');
 	    }
     	else
 		{
