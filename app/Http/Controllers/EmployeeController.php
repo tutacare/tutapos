@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Requests\EmployeeStoreRequest;
+use App\Http\Requests\EmployeeUpdateRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session, \Hash;
 use Illuminate\Http\Request;
 
@@ -90,7 +91,16 @@ class EmployeeController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		if (Auth::check())
+		{
+		$employees = User::find($id);
+        return view('employee.edit')
+            ->with('employee', $employees);
+        }
+        else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -101,7 +111,36 @@ class EmployeeController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$rules = array(
+			'name' => 'required',
+			'email' => 'required|email|unique:users,email,' . $id .'',
+			'password' => 'min:6|max:30|confirmed',
+			);
+			$validator = Validator::make(Input::all(), $rules);
+			if ($validator->fails()) 
+			{
+				 return Redirect::to('employees/' . $id . '/edit')
+				->withErrors($validator);
+			} else {
+	            $users = User::find($id);
+	            $users->name = Input::get('name');
+	            $users->email = Input::get('email');
+	            if(!empty(Input::get('password'))) 
+	            {
+	            	$users->password = Hash::make(Input::get('password'));
+	            }
+	            $users->save();
+	            // redirect
+	            Session::flash('message', 'You have successfully updated employee');
+	            return Redirect::to('employees');
+	        }
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -112,7 +151,18 @@ class EmployeeController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if (Auth::check())
+		{
+			$users = User::find($id);
+	        $users->delete();
+	        // redirect
+	        Session::flash('message', 'You have successfully deleted employee');
+	        return Redirect::to('employees');
+		}
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 }
