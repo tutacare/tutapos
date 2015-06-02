@@ -62,10 +62,8 @@ class InventoryController extends Controller {
 		if (Auth::check())
 		{
 			$items = Item::find($id);
-			$inventories = Inventory::all();
 			return view('inventory.edit')
-	            ->with('item', $items)
-	            ->with('inventory', $inventories);
+	            ->with('item', $items);
 		}
 		else
 		{

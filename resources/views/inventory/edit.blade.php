@@ -19,7 +19,7 @@
 					<tr><td>Item Name</td><td>{{ $item->item_name }}</td></tr>
 					<tr><td>Current Quantity</td><td>{{ $item->quantity }}</td></tr>
 					
-					{!! Form::model($inventory, array('route' => array('inventory.update', $item->id), 'method' => 'PUT')) !!}
+					{!! Form::model($item->inventory, array('route' => array('inventory.update', $item->id), 'method' => 'PUT')) !!}
 					<tr><td>Inventory to add/subtract *</td><td>{!! Form::text('in_out_qty', Input::old('in_out_qty'), array('class' => 'form-control')) !!}</td></tr>
 					<tr><td>Comments</td><td>{!! Form::text('remarks', Input::old('remarks'), array('class' => 'form-control')) !!}</td></tr>
 					<tr><td>&nbsp;</td><td>{!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}</td></tr>
@@ -35,7 +35,7 @@
 					        </tr>
 					    </thead>
 					    <tbody>
-					    @foreach($inventory as $value)
+					    @foreach($item->inventory as $value)
 					        <tr>
 					            <td>{{ $value->created_at }}</td>
 					            <td>{{ $value->in_out_qty }}</td>

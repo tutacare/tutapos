@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Inventory;
 use App\Http\Requests\ItemRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
@@ -62,9 +63,19 @@ class ItemController extends Controller {
             $items->selling_price = Input::get('selling_price');
             $items->quantity = Input::get('quantity');
             $items->save();
+            // process inventory
+            if(!empty(Input::get('quantity')))
+			{
+				$inventories = new Inventory;
+				$inventories->item_id = $items->id;
+				$inventories->in_out_qty = Input::get('quantity');
+				$inventories->remarks = 'Manual Edit of Quantity';
+				$inventories->save();
+			}
             // process avatar
             $image = $request->file('avatar');
-			if(!empty($image)) {
+			if(!empty($image))
+			{
 				$avatarName = 'item' . $items->id . '.' . 
 				$request->file('avatar')->getClientOriginalExtension();
 
@@ -127,6 +138,13 @@ class ItemController extends Controller {
 		if (Auth::check())
 		{
             $items = Item::find($id);
+            // process inventory
+			$inventories = new Inventory;
+			$inventories->item_id = $id;
+			$inventories->in_out_qty = Input::get('quantity')- $items->quantity;
+			$inventories->remarks = 'Manual Edit of Quantity';
+			$inventories->save();
+			// save update
             $items->upc_ean_isbn = Input::get('upc_ean_isbn');
             $items->item_name = Input::get('item_name');
             $items->size = Input::get('size');
