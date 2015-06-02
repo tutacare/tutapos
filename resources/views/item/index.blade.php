@@ -6,7 +6,7 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">List Items</div>
-                
+               
 				<div class="panel-body">
 				<a class="btn btn-small btn-success" href="{{ URL::to('items/create') }}">New Item</a>
 				<hr />
@@ -40,7 +40,7 @@
             <td>{{ $value->quantity }}</td>
             <td>
 
-                <a class="btn btn-small btn-success" href="{{ URL::to('items/' . $value->id . '/inventory') }}">Inventory</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('inventory/' . $value->id . '/edit') }}">Inventory</a>
                 <a class="btn btn-small btn-info" href="{{ URL::to('items/' . $value->id . '/edit') }}">Edit</a>
                 {!! Form::open(array('url' => 'items/' . $value->id, 'class' => 'pull-right')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
