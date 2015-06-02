@@ -30,6 +30,7 @@
 					    <thead>
 					        <tr>
 					            <td>Inventory Data Tracking</td>
+					            <td>Employee</td>
 					            <td>In/Out Qty</td>
 					            <td>Remarks</td>
 					        </tr>
@@ -38,6 +39,7 @@
 					    @foreach($item->inventory as $value)
 					        <tr>
 					            <td>{{ $value->created_at }}</td>
+					            <td>{{ $value->user->name }}</td>
 					            <td>{{ $value->in_out_qty }}</td>
 					            <td>{{ $value->remarks }}</td>
 					        </tr>

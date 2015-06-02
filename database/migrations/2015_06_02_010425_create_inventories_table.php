@@ -16,6 +16,7 @@ class CreateInventoriesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('item_id');
+			$table->integer('user_id');
 			$table->integer('in_out_qty');
 			$table->string('remarks', 255);
 			$table->timestamps();

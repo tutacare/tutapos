@@ -17,7 +17,7 @@ class InventoryController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		Return Inventory::with('User')->get();
 	}
 
 	/**
@@ -62,8 +62,10 @@ class InventoryController extends Controller {
 		if (Auth::check())
 		{
 			$items = Item::find($id);
+			$inventories = Inventory::all();
 			return view('inventory.edit')
-	            ->with('item', $items);
+	            ->with('item', $items)
+	            ->with('inventory', $inventories);
 		}
 		else
 		{
@@ -87,6 +89,7 @@ class InventoryController extends Controller {
 	            
 	            $inventories = new Inventory;
 	            $inventories->item_id = $id;
+	            $inventories->employee_id = Auth::user()->id;
 	            $inventories->in_out_qty = Input::get('in_out_qty');
 	            $inventories->remarks = Input::get('remarks');
 	            $inventories->save();
