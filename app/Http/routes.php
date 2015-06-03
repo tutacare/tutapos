@@ -24,4 +24,5 @@ Route::resource('customers', 'CustomerController');
 Route::resource('items', 'ItemController');
 Route::resource('inventory', 'InventoryController');
 Route::resource('suppliers', 'SupplierController');
+Route::resource('receivings', 'ReceivingController');
 Route::resource('employees', 'EmployeeController');

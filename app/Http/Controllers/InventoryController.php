@@ -17,7 +17,7 @@ class InventoryController extends Controller {
 	 */
 	public function index()
 	{
-		Return Inventory::with('User')->get();
+		//
 	}
 
 	/**
