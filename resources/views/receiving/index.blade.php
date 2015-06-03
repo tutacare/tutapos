@@ -22,7 +22,9 @@
                         <div ng-controller="SearchItemCtrl">
                             <table class="table table-hover">
                                 <tr ng-repeat="item in items  | filter: searchKeyword | limitTo:10">
-                                <td>@{{item.name}}</td><td><input type="text" value="1" size="2"></td><td>{!! Form::submit('Add>', array('class' => 'btn btn-primary btn-xs')) !!}</td>
+                                {!! Form::open(array('url' => 'receivings')) !!}
+                                <td>@{{item.name}}</td><td><input name="quantity" type="text" value="1" size="2"></td><td>{!! Form::submit('Add>', array('class' => 'btn btn-primary btn-xs')) !!}</td>
+                                {!! Form::close() !!}
                                 </tr>
                             </table>
                         </div>   
