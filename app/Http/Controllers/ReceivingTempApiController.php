@@ -2,11 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\ReceivingTemp;
 use App\Item;
-use \Auth, \Redirect, \Validator, \Input, \Session;
+use \Auth, \Redirect, \Validator, \Input, \Session, \Response;
 use Illuminate\Http\Request;
 
-class ReceivingController extends Controller {
+class ReceivingTempApiController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,16 +16,7 @@ class ReceivingController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
-
-			//$items = Item::all();
-			return view('receiving.index');
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		return Response::json(ReceivingTemp::with('item')->get());
 	}
 
 	/**
@@ -34,7 +26,7 @@ class ReceivingController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('receiving.create');
 	}
 
 	/**
@@ -44,7 +36,11 @@ class ReceivingController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$ReceivingTemps = new ReceivingTemp;
+		$ReceivingTemps->item_id = Input::get('item_id');
+		$ReceivingTemps->quantity = 1;  
+		$ReceivingTemps->save();
+		return $ReceivingTemps;
 	}
 
 	/**
@@ -77,22 +73,7 @@ class ReceivingController extends Controller {
 	 */
 	public function update($id)
 	{
-		if (Auth::check())
-		{
-            $items = Item::find($id);
-            // process inventory
-			$receivingTemps = new ReceivingTemp;
-			$inventories->item_id = $id;
-			$inventories->quantity = Input::get('quantity');
-			$inventories->save();
-			
-            Session::flash('message', 'You have successfully add item');
-            return Redirect::to('receivings');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		//
 	}
 
 	/**

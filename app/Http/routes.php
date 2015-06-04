@@ -26,3 +26,5 @@ Route::resource('inventory', 'InventoryController');
 Route::resource('suppliers', 'SupplierController');
 Route::resource('receivings', 'ReceivingController');
 Route::resource('employees', 'EmployeeController');
+Route::resource('api/item', 'ReceivingApiController');
+Route::resource('api/receivingtemp', 'ReceivingTempApiController');

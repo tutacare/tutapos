@@ -15,28 +15,32 @@
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
 
-                <div class="row">
+                <div class="row" ng-controller="SearchItemCtrl">
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label>Search Item: <input ng-model="searchKeyword" class="form-control"></label>
-                        <div ng-controller="SearchItemCtrl">
+                        
                             <table class="table table-hover">
                                 <tr ng-repeat="item in items  | filter: searchKeyword | limitTo:10">
-                                {!! Form::open(array('url' => 'receivings')) !!}
-                                <td>@{{item.name}}</td><td><input name="quantity" type="text" value="1" size="2"></td><td>{!! Form::submit('Add>', array('class' => 'btn btn-primary btn-xs')) !!}</td>
-                                {!! Form::close() !!}
+ 
+                                <td>@{{item.item_name}}</td><td><button class="btn btn-primary btn-xs" type="button" ng-click="addReceivingTemp(item, newreceivingtemp)">Add></button></td>
+  
                                 </tr>
                             </table>
-                        </div>   
+                          
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-9">
+                        
+                           
                             <table class="table table-bordered">
-                                <tr><th>Item Name</th><th>Cost</th><th>Quantity</th><th>Stock</th></tr>
-                                <tr ng-repeat="item in items  | filter: searchKeyword | limitTo:3">
-                                <td>@{{item.name}}</td><td><input type="text"></td>
+                                <tr><th>Item ID</th><th>Item Name</th><th>Cost</th><th>Quantity</th><th>Total</th></tr>
+                                <tr ng-repeat="newreceivingtemp in receivingtemp">
+
+                                <td>@{{newreceivingtemp.item_id}}</td><td>@{{newreceivingtemp.item.item_name}}</td><td>@{{newreceivingtemp.item.cost_price | currency}}</td><td><input type="text" ng-model="newreceivingtemp.quantity" size="2"></td><td>@{{newreceivingtemp.item.cost_price * newreceivingtemp.quantity | currency}}</td>
                                 </tr>
                             </table>
+                     
                     </div>
 
                 </div>
@@ -47,26 +51,6 @@
     </div>
 </div>
 
-
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-<script>
-(function(){
-    var app = angular.module('store', [ ]);
-
-    app.controller("SearchItemCtrl", function($scope) {
-    $scope.items = listItems;
-    });
-
-    var listItems = [
-    @foreach($item as $value)
-    {
-        name: '{{$value->item_name}}',
-        cost_price: '{{$value->cost_price}}',
-        quantity: '{{$value->quantity}}',
-    },
-    @endforeach
-    ];
-    
-})();
-</script>
+{!! Html::script('js/app.js', array('type' => 'text/javascript')) !!}
 @endsection

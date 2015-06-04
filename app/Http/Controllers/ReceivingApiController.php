@@ -3,10 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Item;
-use \Auth, \Redirect, \Validator, \Input, \Session;
+use \Auth, \Redirect, \Validator, \Input, \Session, \Response;
 use Illuminate\Http\Request;
 
-class ReceivingController extends Controller {
+class ReceivingApiController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,16 +15,7 @@ class ReceivingController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
-
-			//$items = Item::all();
-			return view('receiving.index');
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		return Response::json(Item::get());
 	}
 
 	/**
@@ -77,22 +68,7 @@ class ReceivingController extends Controller {
 	 */
 	public function update($id)
 	{
-		if (Auth::check())
-		{
-            $items = Item::find($id);
-            // process inventory
-			$receivingTemps = new ReceivingTemp;
-			$inventories->item_id = $id;
-			$inventories->quantity = Input::get('quantity');
-			$inventories->save();
-			
-            Session::flash('message', 'You have successfully add item');
-            return Redirect::to('receivings');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		//
 	}
 
 	/**
