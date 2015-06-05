@@ -22,5 +22,20 @@
                     });
             });
         }
+        $scope.updateReceivingTemp = function(newreceivingtemp) {
+            
+            $http.put('api/receivingtemp/' + newreceivingtemp.id, { quantity: newreceivingtemp.quantity }).
+            success(function(data, status, headers, config) {
+                
+                });
+        }
+        $scope.removeReceivingTemp = function(id) {
+        $http.delete('api/receivingtemp/' + id).
+        success(function(data, status, headers, config) {
+            $http.get('api/receivingtemp').success(function(data) {
+                    $scope.receivingtemp = data;
+                    });
+            });
+        }
     }]);
 })();

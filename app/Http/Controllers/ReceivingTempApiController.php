@@ -73,7 +73,10 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$ReceivingTemps = ReceivingTemp::find($id);
+        $ReceivingTemps->quantity = Input::get('quantity');
+        $ReceivingTemps->save();
+        return $ReceivingTemps;
 	}
 
 	/**
@@ -84,7 +87,7 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		ReceivingTemp::destroy($id);
 	}
 
 }
