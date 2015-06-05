@@ -28,12 +28,12 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="http://tutacare.github.io/tutapos/">TutaPOS</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
+					<li><a href="{{ url('/') }}">Dashboard</a></li>
 					@if (Auth::check())
 						<li><a href="{{ url('/customers') }}">Customers</a></li>
 						<li><a href="{{ url('/items') }}">Items</a></li>

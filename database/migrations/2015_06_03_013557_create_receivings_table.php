@@ -15,6 +15,9 @@ class CreateReceivingsTable extends Migration {
 		Schema::create('receivings', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('supplier_id', 10)->nullable();
+			$table->integer('employee_id', 10);
+			$table->string('payment_type', 15)->nullable();
 			$table->timestamps();
 		});
 	}

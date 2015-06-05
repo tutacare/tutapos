@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Receiving;
+use App\Supplier;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -18,8 +20,11 @@ class ReceivingController extends Controller {
 		if (Auth::check())
 		{
 
-			//$items = Item::all();
-			return view('receiving.index');
+			$receivings = Receiving::orderBy('id', 'desc')->first();
+			$suppliers = Supplier::lists('company_name', 'id');
+			return view('receiving.index')
+				->with('receiving', $receivings)
+				->with('supplier', $suppliers);
 		} 
 		else
 		{
