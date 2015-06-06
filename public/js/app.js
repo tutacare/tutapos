@@ -30,12 +30,21 @@
                 });
         }
         $scope.removeReceivingTemp = function(id) {
-        $http.delete('api/receivingtemp/' + id).
-        success(function(data, status, headers, config) {
-            $http.get('api/receivingtemp').success(function(data) {
-                    $scope.receivingtemp = data;
-                    });
-            });
+            $http.delete('api/receivingtemp/' + id).
+            success(function(data, status, headers, config) {
+                $http.get('api/receivingtemp').success(function(data) {
+                        $scope.receivingtemp = data;
+                        });
+                });
         }
+            
+         $scope.sum = function(list) {
+          var total=0;
+  angular.forEach(list , function(newreceivingtemp){
+    total+= parseFloat(newreceivingtemp.item.cost_price * newreceivingtemp.quantity);
+  });
+  return total;
+         }
+
     }]);
 })();

@@ -75,6 +75,45 @@
                             </tr>
                         </table>
 
+                        <div class="row">
+                            
+                            <form class="form-horizontal">
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label for="total" class="col-sm-4 control-label">Amount Tendered</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">$</div>
+                                                <input type="text" class="form-control" id="amount_tendered"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="employee" class="col-sm-4 control-label">Comments</label>
+                                        <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="comments" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="supplier_id" class="col-sm-4 control-label">TOTAL:</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><b>@{{sum(receivingtemp) | currency}}</b></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                        <button type="button" class="btn btn-primary btn-block">Finish Receiving</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                        </div>
+
                     </div>
 
                 </div>
