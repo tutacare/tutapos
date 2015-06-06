@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html ng-app="store">
+<html ng-app="tutapos">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>TutaPOS</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
+	<link href="{{ asset('/css/footer.css') }}" rel="stylesheet">
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" href="http://tutahosting.net/wp-content/uploads/2015/01/tutaico.png" type="image/x-icon" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,6 +40,7 @@
 						<li><a href="{{ url('/items') }}">Items</a></li>
 						<li><a href="{{ url('/suppliers') }}">Suppliers</a></li>
 						<li><a href="{{ url('/receivings') }}">Receivings</a></li>
+						<li><a href="{{ url('/sales') }}">Sales</a></li>
 						<li><a href="{{ url('/employees') }}">Employees</a></li>
 					@endif
 				</ul>
@@ -62,6 +64,11 @@
 
 	@yield('content')
 
+	<footer class="footer">
+      <div class="container">
+        <p class="text-muted">You are using TutaPOS.</p>
+      </div>
+    </footer>
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>

@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('store', [ ]);
+    var app = angular.module('tutapos', [ ]);
 
     app.controller("SearchItemCtrl", [ '$scope', '$http', function($scope, $http) {
         $scope.items = [ ];
@@ -36,15 +36,14 @@
                         $scope.receivingtemp = data;
                         });
                 });
+        }     
+        $scope.sum = function(list) {
+            var total=0;
+            angular.forEach(list , function(newreceivingtemp){
+                total+= parseFloat(newreceivingtemp.item.cost_price * newreceivingtemp.quantity);
+            });
+            return total;
         }
-            
-         $scope.sum = function(list) {
-          var total=0;
-  angular.forEach(list , function(newreceivingtemp){
-    total+= parseFloat(newreceivingtemp.item.cost_price * newreceivingtemp.quantity);
-  });
-  return total;
-         }
 
     }]);
 })();

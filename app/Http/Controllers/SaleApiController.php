@@ -2,12 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Receiving;
-use App\Supplier;
-use \Auth, \Redirect, \Validator, \Input, \Session;
+
 use Illuminate\Http\Request;
 
-class ReceivingController extends Controller {
+class SaleApiController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,19 +14,7 @@ class ReceivingController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
-
-			$receivings = Receiving::orderBy('id', 'desc')->first();
-			$suppliers = Supplier::lists('company_name', 'id');
-			return view('receiving.index')
-				->with('receiving', $receivings)
-				->with('supplier', $suppliers);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		//
 	}
 
 	/**
@@ -81,22 +67,7 @@ class ReceivingController extends Controller {
 	 */
 	public function update($id)
 	{
-		if (Auth::check())
-		{
-            $items = Item::find($id);
-            // process inventory
-			$receivingTemps = new ReceivingTemp;
-			$inventories->item_id = $id;
-			$inventories->quantity = Input::get('quantity');
-			$inventories->save();
-			
-            Session::flash('message', 'You have successfully add item');
-            return Redirect::to('receivings');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		//
 	}
 
 	/**

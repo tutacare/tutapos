@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReceivingsTable extends Migration {
+class CreateSalesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateReceivingsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('receivings', function(Blueprint $table)
+		Schema::create('sales', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('supplier_id')->nullable()->default(NULL);
+			$table->integer('customer_id')->nullable()->default(NULL);
 			$table->integer('employee_id');
 			$table->string('payment_type', 15)->nullable()->default(NULL);
 			$table->timestamps();
@@ -29,7 +29,7 @@ class CreateReceivingsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('receivings');
+		Schema::drop('sales');
 	}
 
 }
