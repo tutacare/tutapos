@@ -66,7 +66,7 @@
 
 	<footer class="footer">
       <div class="container">
-        <p class="text-muted">You are using TutaPOS.</p>
+        <p class="text-muted">You are using TutaPOS by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.</p>
       </div>
     </footer>
 	<!-- Scripts -->

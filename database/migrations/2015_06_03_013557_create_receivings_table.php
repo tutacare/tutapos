@@ -15,9 +15,10 @@ class CreateReceivingsTable extends Migration {
 		Schema::create('receivings', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('supplier_id')->nullable()->default(NULL);
+			$table->integer('supplier_id')->nullable();
 			$table->integer('employee_id');
-			$table->string('payment_type', 15)->nullable()->default(NULL);
+			$table->string('payment_type', 15)->nullable();
+			$table->string('comments', 255)->nullable();
 			$table->timestamps();
 		});
 	}

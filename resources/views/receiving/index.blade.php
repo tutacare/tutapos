@@ -33,7 +33,7 @@
 
                         <div class="row">
                             
-                            <form class="form-horizontal">
+                            {!! Form::open(array('url' => 'receivings', 'class' => 'form-horizontal')) !!}
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="invoice" class="col-sm-3 control-label">Invoice</label>
@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <label for="employee" class="col-sm-3 control-label">Employee</label>
                                         <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="employee" value="{{ Auth::user()->name }}" readonly/>
+                                        <input type="text" class="form-control" name="employee_id" id="employee" value="{{ Auth::user()->name }}" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -64,8 +64,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                            
                         </div>
                            
                         <table class="table table-bordered">
@@ -77,7 +75,7 @@
 
                         <div class="row">
                             
-                            <form class="form-horizontal">
+                            
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="total" class="col-sm-4 control-label">Amount Tendered</label>
@@ -88,7 +86,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div>&nbsp;</div>
                                     <div class="form-group">
                                         <label for="employee" class="col-sm-4 control-label">Comments</label>
                                         <div class="col-sm-8">
@@ -103,16 +101,17 @@
                                             <p class="form-control-static"><b>@{{sum(receivingtemp) | currency}}</b></p>
                                         </div>
                                     </div>
-
+                                    <div>&nbsp;</div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                        <button type="button" class="btn btn-primary btn-block">Finish Receiving</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Finish Receiving</button>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                            
                         </div>
+                            {!! Form::close() !!}
+                            
+                        
 
                     </div>
 

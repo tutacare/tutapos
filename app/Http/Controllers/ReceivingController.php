@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Receiving;
+use App\ReceivingTemp;
+use App\ReceivingItem;
 use App\Supplier;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
@@ -48,7 +50,32 @@ class ReceivingController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		if (Auth::check())
+		{
+		    $receivings = new Receiving;
+            $receivings->supplier_id = Input::get('supplier_id');
+            $receivings->employee_id = Auth::user()->id;
+            $receivings->payment_type = Input::get('payment_type');
+            $receivings->comments = Input::get('comments');
+            $receivings->save();
+            // process receiving items
+            $receivingItems = ReceivingTemp::all();
+			foreach ($receivingItems as $value) {
+				$receivingItemsData = new ReceivingItem;
+				$receivingItemsData->receiving_id = $receivings->id;
+				$receivingItemsData->item_id = $value->item_id;
+				$receivingItemsData->quantity = $value->quantity;
+				$receivingItemsData->save();
+			}
+			ReceivingTemp::truncate();
+	        
+            Session::flash('message', 'You have successfully added receivings');
+            return Redirect::to('receivings');
+	    }
+    	else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**

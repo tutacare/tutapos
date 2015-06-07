@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
 
@@ -25,6 +25,7 @@ Route::resource('items', 'ItemController');
 Route::resource('inventory', 'InventoryController');
 Route::resource('suppliers', 'SupplierController');
 Route::resource('receivings', 'ReceivingController');
+Route::resource('receiving-item', 'ReceivingItemController');
 Route::resource('sales', 'SaleController');
 Route::resource('employees', 'EmployeeController');
 

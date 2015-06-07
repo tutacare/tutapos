@@ -33,7 +33,7 @@
 
                         <div class="row">
                             
-                            <form class="form-horizontal">
+                            {!! Form::open(array('url' => 'sales', 'class' => 'form-horizontal')) !!}
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="invoice" class="col-sm-3 control-label">Invoice</label>
@@ -118,7 +118,7 @@
                                     </div>
 
                                 </div>
-                            </form>
+                            {!! Form::close() !!}
                             
                         </div>
 
