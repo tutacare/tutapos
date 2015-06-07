@@ -16,7 +16,7 @@ class CreateReceivingsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('supplier_id')->nullable();
-			$table->integer('employee_id');
+			$table->integer('user_id');
 			$table->string('payment_type', 15)->nullable();
 			$table->string('comments', 255)->nullable();
 			$table->timestamps();

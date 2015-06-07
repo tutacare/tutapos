@@ -5,7 +5,9 @@ use App\Http\Controllers\Controller;
 use App\Receiving;
 use App\ReceivingTemp;
 use App\ReceivingItem;
+use App\Inventory;
 use App\Supplier;
+use App\Item;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -54,7 +56,7 @@ class ReceivingController extends Controller {
 		{
 		    $receivings = new Receiving;
             $receivings->supplier_id = Input::get('supplier_id');
-            $receivings->employee_id = Auth::user()->id;
+            $receivings->user_id = Auth::user()->id;
             $receivings->payment_type = Input::get('payment_type');
             $receivings->comments = Input::get('comments');
             $receivings->save();
@@ -66,7 +68,19 @@ class ReceivingController extends Controller {
 				$receivingItemsData->item_id = $value->item_id;
 				$receivingItemsData->quantity = $value->quantity;
 				$receivingItemsData->save();
+				//process inventory
+				$items = Item::find($value->item_id);
+				$inventories = new Inventory;
+				$inventories->item_id = $value->item_id;
+				$inventories->user_id = Auth::user()->id;
+				$inventories->in_out_qty = $value->quantity;
+				$inventories->remarks = 'RECV'.$receivings->id;
+				$inventories->save();
+				//process item quantity
+	            $items->quantity = $items->quantity + $value->quantity;
+	            $items->save();
 			}
+			//delete all data on ReceivingTemp model
 			ReceivingTemp::truncate();
 	        
             Session::flash('message', 'You have successfully added receivings');

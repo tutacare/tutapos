@@ -16,7 +16,7 @@ class CreateSalesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('customer_id')->nullable();
-			$table->integer('employee_id');
+			$table->integer('user_id');
 			$table->string('payment_type', 15)->nullable();
 			$table->timestamps();
 		});

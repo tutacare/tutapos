@@ -12,7 +12,7 @@
             <div class="panel-body">
 
                 @if (Session::has('message'))
-                    <div class="alert alert-info">{{ Session::get('message') }}</div>
+                    <div class="alert alert-success">{{ Session::get('message') }}</div>
                 @endif
 
                 <div class="row" ng-controller="SearchItemCtrl">

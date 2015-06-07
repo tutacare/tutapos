@@ -41,6 +41,7 @@
 						<li><a href="{{ url('/suppliers') }}">Suppliers</a></li>
 						<li><a href="{{ url('/receivings') }}">Receivings</a></li>
 						<li><a href="{{ url('/sales') }}">Sales</a></li>
+						<li><a href="{{ url('/reports') }}">Reports</a></li>
 						<li><a href="{{ url('/employees') }}">Employees</a></li>
 					@endif
 				</ul>
