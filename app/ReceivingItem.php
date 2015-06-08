@@ -3,10 +3,10 @@
 use Illuminate\Database\Eloquent\Model;
 
 class ReceivingItem extends Model {
-
-	public function receiving()
+	
+    public function item()
     {
-        return $this->hasMany('App\Receiving')->orderBy('id', 'DESC');
+        return $this->belongsTo('App\Item');
     }
 
 }

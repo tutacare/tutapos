@@ -36,9 +36,32 @@
             <td>{{ $value->payment_type }}</td>
             <td>{{ $value->comments }}</td>
             <td>
-                <a class="btn btn-small btn-info" href="{{ URL::to('reports/receivings/detailed' . $value->id . '/show') }}">Detail</a>
+                <a class="btn btn-small btn-info" data-toggle="collapse" href="#detailedReceivings{{ $value->id }}" aria-expanded="false" aria-controls="detailedReceivings">
+                    Detail</a>
             </td>
         </tr>
+        
+            <tr class="collapse" id="detailedReceivings{{ $value->id }}">
+                <td colspan="9">
+                    <table class="table">
+                        <tr>
+                            <td>Item ID</td>
+                            <td>Item Name</td>
+                            <td>Item Received</td>
+                            <td>Total</td>
+                        </tr>
+                        @foreach(ReportReceivingsDetailed::receiving_detailed($value->id) as $receiving_detailed)
+                        <tr>
+                            <td>{{ $receiving_detailed->item_id }}</td>
+                            <td>{{ $receiving_detailed->item->item_name }}</td>
+                            <td>{{ $receiving_detailed->quantity }}</td>
+                            <td>{{ $receiving_detailed->cost_price }}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </td>
+            </tr>
+
     @endforeach
     </tbody>
 </table>

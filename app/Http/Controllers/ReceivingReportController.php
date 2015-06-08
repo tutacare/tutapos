@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Receiving;
-use \Auth;
+use \Auth, \Redirect;
 use Illuminate\Http\Request;
 
 class ReceivingReportController extends Controller {
@@ -88,6 +88,11 @@ class ReceivingReportController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function get_item_receiving($id)
+	{
+		return "heloo";
 	}
 
 }
