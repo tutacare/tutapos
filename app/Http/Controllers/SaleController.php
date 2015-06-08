@@ -3,7 +3,11 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Sale;
+use App\SaleTemp;
+use App\SaleItem;
+use App\Inventory;
 use App\Customer;
+use App\Item;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -48,7 +52,44 @@ class SaleController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		if (Auth::check())
+		{
+		    $sales = new Sale;
+            $sales->customer_id = Input::get('customer_id');
+            $sales->user_id = Auth::user()->id;
+            $sales->payment_type = Input::get('payment_type');
+            $sales->comments = Input::get('comments');
+            $sales->save();
+            // process sale items
+            $saleItems = SaleTemp::all();
+			foreach ($saleItems as $value) {
+				$saleItemsData = new SaleItem;
+				$saleItemsData->sale_id = $sales->id;
+				$saleItemsData->item_id = $value->item_id;
+				$saleItemsData->quantity = $value->quantity;
+				$saleItemsData->save();
+				//process inventory
+				$items = Item::find($value->item_id);
+				$inventories = new Inventory;
+				$inventories->item_id = $value->item_id;
+				$inventories->user_id = Auth::user()->id;
+				$inventories->in_out_qty = -($value->quantity);
+				$inventories->remarks = 'SALE'.$sales->id;
+				$inventories->save();
+				//process item quantity
+	            $items->quantity = $items->quantity - $value->quantity;
+	            $items->save();
+			}
+			//delete all data on SaleTemp model
+			SaleTemp::truncate();
+	        
+            Session::flash('message', 'You have successfully added sales');
+            return Redirect::to('sales');
+	    }
+    	else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**

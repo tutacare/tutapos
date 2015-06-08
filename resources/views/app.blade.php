@@ -41,7 +41,12 @@
 						<li><a href="{{ url('/suppliers') }}">Suppliers</a></li>
 						<li><a href="{{ url('/receivings') }}">Receivings</a></li>
 						<li><a href="{{ url('/sales') }}">Sales</a></li>
-						<li><a href="{{ url('/reports') }}">Reports</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Receivings</a></li>
+							</ul>
+						</li>
 						<li><a href="{{ url('/employees') }}">Employees</a></li>
 					@endif
 				</ul>
@@ -67,7 +72,7 @@
 
 	<footer class="footer">
       <div class="container">
-        <p class="text-muted">You are using TutaPOS by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.</p>
+        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.</p>
       </div>
     </footer>
 	<!-- Scripts -->

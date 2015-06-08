@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalesTable extends Migration {
+class CreateSaleItemsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,12 @@ class CreateSalesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sales', function(Blueprint $table)
+		Schema::create('sale_items', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('customer_id')->nullable();
-			$table->integer('user_id');
-			$table->string('payment_type', 15)->nullable();
-			$table->string('comments', 255)->nullable();
+			$table->integer('sale_id');
+			$table->integer('item_id');
+			$table->integer('quantity');
 			$table->timestamps();
 		});
 	}
@@ -30,7 +29,7 @@ class CreateSalesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('sales');
+		Schema::drop('sale_items');
 	}
 
 }

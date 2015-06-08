@@ -64,7 +64,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                             
                         </div>
                            
@@ -76,8 +75,6 @@
                         </table>
 
                         <div class="row">
-                            
-                            <form class="form-horizontal">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="total" class="col-sm-4 control-label">Add Payment</label>
@@ -88,11 +85,11 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div>&nbsp;</div>
                                     <div class="form-group">
                                         <label for="employee" class="col-sm-4 control-label">Comments</label>
                                         <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="comments" />
+                                        <input type="text" class="form-control" name="comments" id="comments" />
                                         </div>
                                     </div>
                                 </div>
@@ -113,14 +110,15 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button type="button" class="btn btn-success btn-block">Complete Sale</button>
+                                            <button type="submit" class="btn btn-success btn-block">Complete Sale</button>
                                         </div>
                                     </div>
 
                                 </div>
+                            </div>
                             {!! Form::close() !!}
                             
-                        </div>
+                        
 
                     </div>
 
