@@ -2,12 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\ReceivingTemp;
-use App\Item;
-use \Auth, \Redirect, \Validator, \Input, \Session, \Response;
+use App\Receiving;
+use \Auth;
 use Illuminate\Http\Request;
 
-class ReceivingTempApiController extends Controller {
+class ReceivingReportController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,7 +15,15 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function index()
 	{
-		return Response::json(ReceivingTemp::with('item')->get());
+		if (Auth::check())
+		{
+			$receivingsReport = Receiving::all();
+			return view('report.receiving')->with('receivingReport', $receivingsReport);
+		} 
+		else
+		{
+			return Redirect::to('/auth/login');
+		}
 	}
 
 	/**
@@ -26,7 +33,7 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function create()
 	{
-		return view('receiving.create');
+		//
 	}
 
 	/**
@@ -36,12 +43,7 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function store()
 	{
-		$ReceivingTemps = new ReceivingTemp;
-		$ReceivingTemps->item_id = Input::get('item_id');
-		$ReceivingTemps->cost_price = Input::get('cost_price');
-		$ReceivingTemps->quantity = 1;
-		$ReceivingTemps->save();
-		return $ReceivingTemps;
+		//
 	}
 
 	/**
@@ -74,10 +76,7 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function update($id)
 	{
-		$ReceivingTemps = ReceivingTemp::find($id);
-        $ReceivingTemps->quantity = Input::get('quantity');
-        $ReceivingTemps->save();
-        return $ReceivingTemps;
+		//
 	}
 
 	/**
@@ -88,7 +87,7 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		ReceivingTemp::destroy($id);
+		//
 	}
 
 }

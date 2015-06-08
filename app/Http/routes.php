@@ -27,6 +27,10 @@ Route::resource('suppliers', 'SupplierController');
 Route::resource('receivings', 'ReceivingController');
 Route::resource('receiving-item', 'ReceivingItemController');
 Route::resource('sales', 'SaleController');
+
+Route::resource('reports/receivings', 'ReceivingReportController');
+Route::resource('reports/receivings/detailed', 'ReceivingReportController');
+
 Route::resource('employees', 'EmployeeController');
 
 Route::resource('api/item', 'ReceivingApiController');

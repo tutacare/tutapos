@@ -11,12 +11,11 @@
         $http.get('api/receivingtemp').success(function(data, status, headers, config) {
             $scope.receivingtemp = data;
         });
-        $scope.addReceivingTemp = function(item, newreceivingtemp) {
-            newreceivingtemp.item_id=item.id;
-            $http.post('api/receivingtemp', $scope.newreceivingtemp).
+        $scope.addReceivingTemp = function(item,newreceivingtemp) {
+            $http.post('api/receivingtemp', { item_id: item.id, cost_price: item.cost_price }).
             success(function(data, status, headers, config) {
                 $scope.receivingtemp.push(data);
-                $scope.newreceivingtemp.item_id = "";
+
                     $http.get('api/receivingtemp').success(function(data) {
                     $scope.receivingtemp = data;
                     });
