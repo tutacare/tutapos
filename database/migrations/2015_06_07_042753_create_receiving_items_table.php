@@ -17,8 +17,9 @@ class CreateReceivingItemsTable extends Migration {
 			$table->increments('id');
 			$table->integer('receiving_id');
 			$table->integer('item_id');
-			$table->decimal('cost_price',5, 2);
+			$table->decimal('cost_price',9, 2);
 			$table->integer('quantity');
+			$table->decimal('total_cost',9, 2);
 			$table->timestamps();
 		});
 	}

@@ -20,8 +20,8 @@ class CreateItemsTable extends Migration {
 			$table->string('size',20);
 			$table->text('description');
 			$table->string('avatar', 255)->default('no-foto.png');
-			$table->decimal('cost_price',5, 2);
-			$table->decimal('selling_price',5, 2);
+			$table->decimal('cost_price',9, 2);
+			$table->decimal('selling_price',9, 2);
 			$table->integer('quantity');
 			$table->timestamps();
 		});
