@@ -32,8 +32,8 @@
             <td>{{DB::table('sale_items')->where('sale_id', $value->id)->sum('quantity')}}</td>
             <td>{{ $value->user->name }}</td>
             <td>{{ $value->customer->name }}</td>
-            <td>${{DB::table('sale_items')->where('sale_id', $value->id)->sum('selling_price')}}</td>
-            <td>TODO</td>
+            <td>${{DB::table('sale_items')->where('sale_id', $value->id)->sum('total_selling')}}</td>
+            <td>{{DB::table('sale_items')->where('sale_id', $value->id)->sum('total_selling') - DB::table('sale_items')->where('sale_id', $value->id)->sum('total_cost')}}</td>
             <td>{{ $value->payment_type }}</td>
             <td>{{ $value->comments }}</td>
             <td>
@@ -43,7 +43,7 @@
         </tr>
         
             <tr class="collapse" id="detailedSales{{ $value->id }}">
-                <td colspan="9">
+                <td colspan="10">
                     <table class="table">
                         <tr>
                             <td>Item ID</td>
@@ -52,15 +52,15 @@
                             <td>Total</td>
                             <td>Profit</td>
                         </tr>
-                        
+                        @foreach(ReportSalesDetailed::sale_detailed($value->id) as $SaleDetailed)
                         <tr>
-                            <td>TODO</td>
-                            <td>TODO</td>
-                            <td>TODO</td>
-                            <td>TODO</td>
-                            <td>TODO</td>
+                            <td>{{ $SaleDetailed->item_id }}</td>
+                            <td>{{ $SaleDetailed->item->item_name }}</td>
+                            <td>{{ $SaleDetailed->quantity }}</td>
+                            <td>{{ $SaleDetailed->selling_price}}</td>
+                            <td>{{ ($SaleDetailed->quantity * $SaleDetailed->selling_price) - ($SaleDetailed->quantity * $SaleDetailed->cost_price)}}</td>
                         </tr>
-                        
+                        @endforeach
                     </table>
                 </td>
             </tr>

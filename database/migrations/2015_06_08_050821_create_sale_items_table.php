@@ -20,6 +20,8 @@ class CreateSaleItemsTable extends Migration {
 			$table->decimal('cost_price',9, 2);
 			$table->decimal('selling_price',9, 2);
 			$table->integer('quantity');
+			$table->decimal('total_cost',9, 2);
+			$table->decimal('total_selling',9, 2);
 			$table->timestamps();
 		});
 	}

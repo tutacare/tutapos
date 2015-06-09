@@ -22,7 +22,8 @@
         }
         $scope.updateSaleTemp = function(newsaletemp) {
             
-            $http.put('api/saletemp/' + newsaletemp.id, { quantity: newsaletemp.quantity }).
+            $http.put('api/saletemp/' + newsaletemp.id, { quantity: newsaletemp.quantity, total_cost: newsaletemp.item.cost_price * newsaletemp.quantity,
+                total_selling: newsaletemp.item.selling_price * newsaletemp.quantity }).
             success(function(data, status, headers, config) {
                 
                 });

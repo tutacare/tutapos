@@ -8,7 +8,7 @@
 				<div class="panel-heading">Dashboard</div>
 
 				<div class="panel-body">
-					{{ Lang::get('dashboard.welcome') }}
+					{{ trans('dashboard.welcome') }}
 				</div>
 			</div>
 		</div>

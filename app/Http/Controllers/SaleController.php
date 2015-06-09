@@ -66,7 +66,11 @@ class SaleController extends Controller {
 				$saleItemsData = new SaleItem;
 				$saleItemsData->sale_id = $sales->id;
 				$saleItemsData->item_id = $value->item_id;
+				$saleItemsData->cost_price = $value->cost_price;
+				$saleItemsData->selling_price = $value->selling_price;
 				$saleItemsData->quantity = $value->quantity;
+				$saleItemsData->total_cost = $value->total_cost;
+				$saleItemsData->total_selling = $value->total_selling;
 				$saleItemsData->save();
 				//process inventory
 				$items = Item::find($value->item_id);
