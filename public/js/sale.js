@@ -12,11 +12,9 @@
             $scope.saletemp = data;
         });
         $scope.addSaleTemp = function(item, newsaletemp) {
-            newsaletemp.item_id=item.id;
-            $http.post('api/saletemp', $scope.newsaletemp).
+            $http.post('api/saletemp', { item_id: item.id, cost_price: item.cost_price, selling_price: item.selling_price }).
             success(function(data, status, headers, config) {
                 $scope.saletemp.push(data);
-                $scope.newsaletemp.item_id = "";
                     $http.get('api/saletemp').success(function(data) {
                     $scope.saletemp = data;
                     });

@@ -9,4 +9,5 @@ class ReportReceivingsDetailed {
         $receivingitems = ReceivingItem::where('receiving_id', $receiving_id)->get();
         return $receivingitems;
     }
+
 }

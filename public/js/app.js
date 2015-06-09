@@ -12,20 +12,17 @@
             $scope.receivingtemp = data;
         });
         $scope.addReceivingTemp = function(item,newreceivingtemp) {
-            $http.post('api/receivingtemp', { item_id: item.id, cost_price: item.cost_price }).
+            $http.post('api/receivingtemp', { item_id: item.id, cost_price: item.cost_price, total_cost: item.cost_price }).
             success(function(data, status, headers, config) {
                 $scope.receivingtemp.push(data);
-
                     $http.get('api/receivingtemp').success(function(data) {
                     $scope.receivingtemp = data;
                     });
             });
         }
         $scope.updateReceivingTemp = function(newreceivingtemp) {
-            
-            $http.put('api/receivingtemp/' + newreceivingtemp.id, { quantity: newreceivingtemp.quantity }).
+            $http.put('api/receivingtemp/' + newreceivingtemp.id, { quantity: newreceivingtemp.quantity, total_cost: newreceivingtemp.item.cost_price * newreceivingtemp.quantity }).
             success(function(data, status, headers, config) {
-                
                 });
         }
         $scope.removeReceivingTemp = function(id) {

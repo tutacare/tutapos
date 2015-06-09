@@ -17,6 +17,8 @@ class CreateSaleItemsTable extends Migration {
 			$table->increments('id');
 			$table->integer('sale_id');
 			$table->integer('item_id');
+			$table->decimal('cost_price',5, 2);
+			$table->decimal('selling_price',5, 2);
 			$table->integer('quantity');
 			$table->timestamps();
 		});

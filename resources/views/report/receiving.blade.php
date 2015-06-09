@@ -31,7 +31,7 @@
             <td>{{DB::table('receiving_items')->where('receiving_id', $value->id)->sum('quantity')}}</td>
             <td>{{ $value->user->name }}</td>
             <td>{{ $value->supplier->company_name }}</td>
-            <td>${{DB::table('receiving_items')->where('receiving_id', $value->id)->sum('cost_price')}}</td>
+            <td>{{DB::table('receiving_items')->where('receiving_id', $value->id)->sum('total_cost')}}</td>
             <td>{{ $value->payment_type }}</td>
             <td>{{ $value->comments }}</td>
             <td>
@@ -54,7 +54,7 @@
                             <td>{{ $receiving_detailed->item_id }}</td>
                             <td>{{ $receiving_detailed->item->item_name }}</td>
                             <td>{{ $receiving_detailed->quantity }}</td>
-                            <td>{{ $receiving_detailed->cost_price }}</td>
+                            <td>{{ $receiving_detailed->quantity * $receiving_detailed->cost_price}}</td>
                         </tr>
                         @endforeach
                     </table>

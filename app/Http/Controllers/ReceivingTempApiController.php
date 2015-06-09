@@ -39,6 +39,7 @@ class ReceivingTempApiController extends Controller {
 		$ReceivingTemps = new ReceivingTemp;
 		$ReceivingTemps->item_id = Input::get('item_id');
 		$ReceivingTemps->cost_price = Input::get('cost_price');
+		$ReceivingTemps->total_cost = Input::get('total_cost');
 		$ReceivingTemps->quantity = 1;
 		$ReceivingTemps->save();
 		return $ReceivingTemps;
@@ -76,6 +77,7 @@ class ReceivingTempApiController extends Controller {
 	{
 		$ReceivingTemps = ReceivingTemp::find($id);
         $ReceivingTemps->quantity = Input::get('quantity');
+        $ReceivingTemps->total_cost = Input::get('total_cost');
         $ReceivingTemps->save();
         return $ReceivingTemps;
 	}

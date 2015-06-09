@@ -68,6 +68,7 @@ class ReceivingController extends Controller {
 				$receivingItemsData->item_id = $value->item_id;
 				$receivingItemsData->cost_price = $value->cost_price;
 				$receivingItemsData->quantity = $value->quantity;
+				$receivingItemsData->total_cost = $value->total_cost;
 				$receivingItemsData->save();
 				//process inventory
 				$items = Item::find($value->item_id);

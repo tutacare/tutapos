@@ -8,7 +8,7 @@
 				<div class="panel-heading">Dashboard</div>
 
 				<div class="panel-body">
-					Welcome to TutaPOS - TUTA Point of Sale.
+					{{ Lang::get('dashboard.welcome') }}
 				</div>
 			</div>
 		</div>

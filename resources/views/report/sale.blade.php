@@ -32,7 +32,7 @@
             <td>{{DB::table('sale_items')->where('sale_id', $value->id)->sum('quantity')}}</td>
             <td>{{ $value->user->name }}</td>
             <td>{{ $value->customer->name }}</td>
-            <td>TODO</td>
+            <td>${{DB::table('sale_items')->where('sale_id', $value->id)->sum('selling_price')}}</td>
             <td>TODO</td>
             <td>{{ $value->payment_type }}</td>
             <td>{{ $value->comments }}</td>
