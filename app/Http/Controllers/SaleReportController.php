@@ -2,11 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Receiving;
+use App\Sale;
 use \Auth, \Redirect;
 use Illuminate\Http\Request;
 
-class ReceivingReportController extends Controller {
+class SaleReportController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -17,8 +17,8 @@ class ReceivingReportController extends Controller {
 	{
 		if (Auth::check())
 		{
-			$receivingsReport = Receiving::all();
-			return view('report.receiving')->with('receivingReport', $receivingsReport);
+			$salesReport = Sale::all();
+			return view('report.sale')->with('saleReport', $salesReport);
 		} 
 		else
 		{

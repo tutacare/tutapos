@@ -29,7 +29,7 @@ Route::resource('receiving-item', 'ReceivingItemController');
 Route::resource('sales', 'SaleController');
 
 Route::resource('reports/receivings', 'ReceivingReportController');
-Route::resource('reports/receivings/detailed', 'ReceivingReportController');
+Route::resource('reports/sales', 'SaleReportController');
 
 Route::resource('employees', 'EmployeeController');
 

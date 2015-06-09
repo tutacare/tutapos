@@ -5,58 +5,62 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Reports - Receivings Report</div>
+				<div class="panel-heading">Reports - Sales Report</div>
 
 				<div class="panel-body">
 
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Receiving ID</td>
+            <td>Sale ID</td>
             <td>Date</td>
-            <td>Items Received</td>
-            <td>Received By</td>
-            <td>Supplied By</td>
+            <td>Items Purchased</td>
+            <td>Sold By</td>
+            <td>Sold To</td>
             <td>Total</td>
+            <td>Profit</td>
             <td>Payment Type</td>
             <td>Comments</td>
             <td>&nbsp;</td>
         </tr>
     </thead>
     <tbody>
-    @foreach($receivingReport as $value)
+    @foreach($saleReport as $value)
         <tr>
             <td>{{ $value->id }}</td>
             <td>{{ $value->created_at }}</td>
-            <td>{{DB::table('receiving_items')->where('receiving_id', $value->id)->sum('quantity')}}</td>
+            <td>{{DB::table('sale_items')->where('sale_id', $value->id)->sum('quantity')}}</td>
             <td>{{ $value->user->name }}</td>
-            <td>{{ $value->supplier->company_name }}</td>
-            <td>${{DB::table('receiving_items')->where('receiving_id', $value->id)->sum('cost_price')}}</td>
+            <td>{{ $value->customer->name }}</td>
+            <td>TODO</td>
+            <td>TODO</td>
             <td>{{ $value->payment_type }}</td>
             <td>{{ $value->comments }}</td>
             <td>
-                <a class="btn btn-small btn-info" data-toggle="collapse" href="#detailedReceivings{{ $value->id }}" aria-expanded="false" aria-controls="detailedReceivings">
+                <a class="btn btn-small btn-info" data-toggle="collapse" href="#detailedSales{{ $value->id }}" aria-expanded="false" aria-controls="detailedReceivings">
                     Detail</a>
             </td>
         </tr>
         
-            <tr class="collapse" id="detailedReceivings{{ $value->id }}">
+            <tr class="collapse" id="detailedSales{{ $value->id }}">
                 <td colspan="9">
                     <table class="table">
                         <tr>
                             <td>Item ID</td>
                             <td>Item Name</td>
-                            <td>Item Received</td>
+                            <td>Quantity Purchased</td>
                             <td>Total</td>
+                            <td>Profit</td>
                         </tr>
-                        @foreach(ReportReceivingsDetailed::receiving_detailed($value->id) as $receiving_detailed)
+                        
                         <tr>
-                            <td>{{ $receiving_detailed->item_id }}</td>
-                            <td>{{ $receiving_detailed->item->item_name }}</td>
-                            <td>{{ $receiving_detailed->quantity }}</td>
-                            <td>{{ $receiving_detailed->cost_price }}</td>
+                            <td>TODO</td>
+                            <td>TODO</td>
+                            <td>TODO</td>
+                            <td>TODO</td>
+                            <td>TODO</td>
                         </tr>
-                        @endforeach
+                        
                     </table>
                 </td>
             </tr>
