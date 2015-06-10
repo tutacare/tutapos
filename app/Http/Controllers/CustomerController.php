@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -16,15 +21,8 @@ class CustomerController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
 			$customers = Customer::all();
 			return view('customer.index')->with('customer', $customers);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -34,14 +32,7 @@ class CustomerController extends Controller {
 	 */
 	public function create()
 	{
-		if (Auth::check())
-		{
 			return view('customer.create');
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -51,9 +42,6 @@ class CustomerController extends Controller {
 	 */
 	public function store(CustomerRequest $request)
 	{
-		if (Auth::check())
-		{
-			
 	            // store
 	            $customers = new Customer;
 	            $customers->name = Input::get('name');
@@ -82,12 +70,6 @@ class CustomerController extends Controller {
 	        	}
 	            Session::flash('message', 'You have successfully added customer');
 	            return Redirect::to('customers');
-	        
-	    }
-    	else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -109,16 +91,9 @@ class CustomerController extends Controller {
 	 */
 	public function edit($id)
 	{
-		if (Auth::check())
-		{
 		$customers = Customer::find($id);
         return view('customer.edit')
             ->with('customer', $customers);
-        }
-        else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -129,9 +104,6 @@ class CustomerController extends Controller {
 	 */
 	public function update(CustomerRequest $request, $id)
 	{
-		if (Auth::check())
-		{
-				
 	            $customers = Customer::find($id);
 	            $customers->name = Input::get('name');
 	            $customers->email = Input::get('email');
@@ -160,11 +132,6 @@ class CustomerController extends Controller {
 	            // redirect
 	            Session::flash('message', 'You have successfully updated customer');
 	            return Redirect::to('customers');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -175,18 +142,11 @@ class CustomerController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		if (Auth::check())
-		{
 			$customers = Customer::find($id);
 	        $customers->delete();
 	        // redirect
 	        Session::flash('message', 'You have successfully deleted customer');
 	        return Redirect::to('customers');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 }

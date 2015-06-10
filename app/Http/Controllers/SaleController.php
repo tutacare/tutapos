@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -20,19 +25,11 @@ class SaleController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
-
-			$sales = Sale::orderBy('id', 'desc')->first();
-			$customers = Customer::lists('name', 'id');
-			return view('sale.index')
-				->with('sale', $sales)
-				->with('customer', $customers);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		$sales = Sale::orderBy('id', 'desc')->first();
+		$customers = Customer::lists('name', 'id');
+		return view('sale.index')
+			->with('sale', $sales)
+			->with('customer', $customers);
 	}
 
 	/**
@@ -52,48 +49,41 @@ class SaleController extends Controller {
 	 */
 	public function store()
 	{
-		if (Auth::check())
-		{
-		    $sales = new Sale;
-            $sales->customer_id = Input::get('customer_id');
-            $sales->user_id = Auth::user()->id;
-            $sales->payment_type = Input::get('payment_type');
-            $sales->comments = Input::get('comments');
-            $sales->save();
-            // process sale items
-            $saleItems = SaleTemp::all();
-			foreach ($saleItems as $value) {
-				$saleItemsData = new SaleItem;
-				$saleItemsData->sale_id = $sales->id;
-				$saleItemsData->item_id = $value->item_id;
-				$saleItemsData->cost_price = $value->cost_price;
-				$saleItemsData->selling_price = $value->selling_price;
-				$saleItemsData->quantity = $value->quantity;
-				$saleItemsData->total_cost = $value->total_cost;
-				$saleItemsData->total_selling = $value->total_selling;
-				$saleItemsData->save();
-				//process inventory
-				$items = Item::find($value->item_id);
-				$inventories = new Inventory;
-				$inventories->item_id = $value->item_id;
-				$inventories->user_id = Auth::user()->id;
-				$inventories->in_out_qty = -($value->quantity);
-				$inventories->remarks = 'SALE'.$sales->id;
-				$inventories->save();
-				//process item quantity
-	            $items->quantity = $items->quantity - $value->quantity;
-	            $items->save();
-			}
-			//delete all data on SaleTemp model
-			SaleTemp::truncate();
-	        
-            Session::flash('message', 'You have successfully added sales');
-            return Redirect::to('sales');
-	    }
-    	else
-		{
-			return Redirect::to('/auth/login');
+	    $sales = new Sale;
+        $sales->customer_id = Input::get('customer_id');
+        $sales->user_id = Auth::user()->id;
+        $sales->payment_type = Input::get('payment_type');
+        $sales->comments = Input::get('comments');
+        $sales->save();
+        // process sale items
+        $saleItems = SaleTemp::all();
+		foreach ($saleItems as $value) {
+			$saleItemsData = new SaleItem;
+			$saleItemsData->sale_id = $sales->id;
+			$saleItemsData->item_id = $value->item_id;
+			$saleItemsData->cost_price = $value->cost_price;
+			$saleItemsData->selling_price = $value->selling_price;
+			$saleItemsData->quantity = $value->quantity;
+			$saleItemsData->total_cost = $value->total_cost;
+			$saleItemsData->total_selling = $value->total_selling;
+			$saleItemsData->save();
+			//process inventory
+			$items = Item::find($value->item_id);
+			$inventories = new Inventory;
+			$inventories->item_id = $value->item_id;
+			$inventories->user_id = Auth::user()->id;
+			$inventories->in_out_qty = -($value->quantity);
+			$inventories->remarks = 'SALE'.$sales->id;
+			$inventories->save();
+			//process item quantity
+            $items->quantity = $items->quantity - $value->quantity;
+            $items->save();
 		}
+		//delete all data on SaleTemp model
+		SaleTemp::truncate();
+        
+        Session::flash('message', 'You have successfully added sales');
+        return Redirect::to('sales');
 	}
 
 	/**

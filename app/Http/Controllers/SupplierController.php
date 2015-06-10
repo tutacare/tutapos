@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -16,15 +21,8 @@ class SupplierController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
-			$suppliers = Supplier::all();
-			return view('supplier.index')->with('supplier', $suppliers);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		$suppliers = Supplier::all();
+		return view('supplier.index')->with('supplier', $suppliers);
 	}
 
 	/**
@@ -34,14 +32,7 @@ class SupplierController extends Controller {
 	 */
 	public function create()
 	{
-		if (Auth::check())
-		{
-			return view('supplier.create');
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		return view('supplier.create');
 	}
 
 	/**
@@ -51,42 +42,35 @@ class SupplierController extends Controller {
 	 */
 	public function store(SupplierRequest $request)
 	{
-		if (Auth::check())
-		{
-            $suppliers = new Supplier;
-            $suppliers->company_name = Input::get('company_name');
-            $suppliers->name = Input::get('name');
-            $suppliers->email = Input::get('email');
-            $suppliers->phone_number = Input::get('phone_number');
-            $suppliers->address = Input::get('address');
-            $suppliers->city = Input::get('city');
-            $suppliers->state = Input::get('state');
-            $suppliers->zip = Input::get('zip');
-            $suppliers->comments = Input::get('comments');
-            $suppliers->account = Input::get('account');
-            $suppliers->save();
-            // process avatar
-	            $image = $request->file('avatar');
-				if(!empty($image)) {
-					$avatarName = 'sup' . $suppliers->id . '.' . 
-					$request->file('avatar')->getClientOriginalExtension();
+        $suppliers = new Supplier;
+        $suppliers->company_name = Input::get('company_name');
+        $suppliers->name = Input::get('name');
+        $suppliers->email = Input::get('email');
+        $suppliers->phone_number = Input::get('phone_number');
+        $suppliers->address = Input::get('address');
+        $suppliers->city = Input::get('city');
+        $suppliers->state = Input::get('state');
+        $suppliers->zip = Input::get('zip');
+        $suppliers->comments = Input::get('comments');
+        $suppliers->account = Input::get('account');
+        $suppliers->save();
+        // process avatar
+            $image = $request->file('avatar');
+			if(!empty($image)) {
+				$avatarName = 'sup' . $suppliers->id . '.' . 
+				$request->file('avatar')->getClientOriginalExtension();
 
-					$request->file('avatar')->move(
-					base_path() . '/public/images/suppliers/', $avatarName
-					);
+				$request->file('avatar')->move(
+				base_path() . '/public/images/suppliers/', $avatarName
+				);
 
-					$supplierAvatar = Supplier::find($suppliers->id);
-					$supplierAvatar->avatar = $avatarName;
-		            $supplierAvatar->save();
-	        	}
+				$supplierAvatar = Supplier::find($suppliers->id);
+				$supplierAvatar->avatar = $avatarName;
+	            $supplierAvatar->save();
+        	}
 
-            Session::flash('message', 'You have successfully added supplier');
-            return Redirect::to('suppliers');
-	    }
-    	else
-		{
-			return Redirect::to('/auth/login');
-		}
+        Session::flash('message', 'You have successfully added supplier');
+        return Redirect::to('suppliers');
 	}
 
 	/**
@@ -108,16 +92,9 @@ class SupplierController extends Controller {
 	 */
 	public function edit($id)
 	{
-		if (Auth::check())
-		{
 		$suppliers = Supplier::find($id);
         return view('supplier.edit')
             ->with('supplier', $suppliers);
-        }
-        else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -128,42 +105,35 @@ class SupplierController extends Controller {
 	 */
 	public function update(SupplierRequest $request, $id)
 	{
-		if (Auth::check())
-		{
-	            $suppliers = Supplier::find($id);
-	            $suppliers->company_name = Input::get('company_name');
-	            $suppliers->name = Input::get('name');
-	            $suppliers->email = Input::get('email');
-	            $suppliers->phone_number = Input::get('phone_number');
-	            $suppliers->address = Input::get('address');
-	            $suppliers->city = Input::get('city');
-	            $suppliers->state = Input::get('state');
-	            $suppliers->zip = Input::get('zip');
-	            $suppliers->comments = Input::get('comments');
-	            $suppliers->account = Input::get('account');
-	            $suppliers->save();
-	            // process avatar
-	            $image = $request->file('avatar');
-				if(!empty($image)) {
-					$avatarName = 'sup' . $id . '.' . 
-					$request->file('avatar')->getClientOriginalExtension();
+        $suppliers = Supplier::find($id);
+        $suppliers->company_name = Input::get('company_name');
+        $suppliers->name = Input::get('name');
+        $suppliers->email = Input::get('email');
+        $suppliers->phone_number = Input::get('phone_number');
+        $suppliers->address = Input::get('address');
+        $suppliers->city = Input::get('city');
+        $suppliers->state = Input::get('state');
+        $suppliers->zip = Input::get('zip');
+        $suppliers->comments = Input::get('comments');
+        $suppliers->account = Input::get('account');
+        $suppliers->save();
+        // process avatar
+        $image = $request->file('avatar');
+		if(!empty($image)) {
+			$avatarName = 'sup' . $id . '.' . 
+			$request->file('avatar')->getClientOriginalExtension();
 
-					$request->file('avatar')->move(
-					base_path() . '/public/images/suppliers/', $avatarName
-					);
+			$request->file('avatar')->move(
+			base_path() . '/public/images/suppliers/', $avatarName
+			);
 
-					$supplierAvatar = Supplier::find($id);
-					$supplierAvatar->avatar = $avatarName;
-		            $supplierAvatar->save();
-	        	}
+			$supplierAvatar = Supplier::find($id);
+			$supplierAvatar->avatar = $avatarName;
+            $supplierAvatar->save();
+    	}
 
-	            Session::flash('message', 'You have successfully updated supplier');
-	            return Redirect::to('suppliers');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+        Session::flash('message', 'You have successfully updated supplier');
+        return Redirect::to('suppliers');
 	}
 
 	/**
@@ -174,18 +144,11 @@ class SupplierController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		if (Auth::check())
-		{
-			$suppliers = Supplier::find($id);
-	        $suppliers->delete();
+		$suppliers = Supplier::find($id);
+        $suppliers->delete();
 
-	        Session::flash('message', 'You have successfully deleted supplier');
-	        return Redirect::to('suppliers');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+        Session::flash('message', 'You have successfully deleted supplier');
+        return Redirect::to('suppliers');
 	}
 
 }

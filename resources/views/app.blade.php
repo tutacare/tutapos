@@ -55,7 +55,6 @@
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
@@ -73,7 +72,7 @@
 
 	<footer class="footer">
       <div class="container">
-        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> v0.2-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.</p>
+        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> v0.3-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.</p>
       </div>
     </footer>
 	<!-- Scripts -->

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class SaleReportController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -15,15 +20,8 @@ class SaleReportController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
 			$salesReport = Sale::all();
 			return view('report.sale')->with('saleReport', $salesReport);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**

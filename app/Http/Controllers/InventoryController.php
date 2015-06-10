@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class InventoryController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -59,18 +64,11 @@ class InventoryController extends Controller {
 	 */
 	public function edit($id)
 	{
-		if (Auth::check())
-		{
 			$items = Item::find($id);
 			$inventories = Inventory::all();
 			return view('inventory.edit')
 	            ->with('item', $items)
 	            ->with('inventory', $inventories);
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -81,8 +79,6 @@ class InventoryController extends Controller {
 	 */
 	public function update(InventoryRequest $request, $id)
 	{
-		if (Auth::check())
-		{
 	            $items = Item::find($id);
 	            $items->quantity = $items->quantity + Input::get('in_out_qty');
 	            $items->save();
@@ -97,11 +93,6 @@ class InventoryController extends Controller {
 
 	            Session::flash('message', 'You have successfully updated item');
 	            return Redirect::to('inventory/' . $id . '/edit');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**

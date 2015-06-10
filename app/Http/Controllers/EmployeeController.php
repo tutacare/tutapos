@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -17,15 +22,8 @@ class EmployeeController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
 			$employees = User::all();
 			return view('employee.index')->with('employee', $employees);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -35,14 +33,7 @@ class EmployeeController extends Controller {
 	 */
 	public function create()
 	{
-		if (Auth::check())
-		{
 			return view('employee.create');
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -52,9 +43,6 @@ class EmployeeController extends Controller {
 	 */
 	public function store(EmployeeStoreRequest $request)
 	{
-		if (Auth::check())
-		{
-			
 	            // store
 	            $users = new User;
 	            $users->name = Input::get('name');
@@ -64,12 +52,6 @@ class EmployeeController extends Controller {
 	            
 	            Session::flash('message', 'You have successfully added employee');
 	            return Redirect::to('employees');
-	        
-	    }
-    	else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -91,16 +73,9 @@ class EmployeeController extends Controller {
 	 */
 	public function edit($id)
 	{
-		if (Auth::check())
-		{
 		$employees = User::find($id);
         return view('employee.edit')
             ->with('employee', $employees);
-        }
-        else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -111,8 +86,6 @@ class EmployeeController extends Controller {
 	 */
 	public function update($id)
 	{
-		if (Auth::check())
-		{
 			$rules = array(
 			'name' => 'required',
 			'email' => 'required|email|unique:users,email,' . $id .'',
@@ -136,11 +109,6 @@ class EmployeeController extends Controller {
 	            Session::flash('message', 'You have successfully updated employee');
 	            return Redirect::to('employees');
 	        }
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -151,18 +119,11 @@ class EmployeeController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		if (Auth::check())
-		{
 			$users = User::find($id);
 	        $users->delete();
 	        // redirect
 	        Session::flash('message', 'You have successfully deleted employee');
 	        return Redirect::to('employees');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 }

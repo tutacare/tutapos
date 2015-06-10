@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ReceivingReportController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -15,15 +20,8 @@ class ReceivingReportController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
 			$receivingsReport = Receiving::all();
 			return view('report.receiving')->with('receivingReport', $receivingsReport);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**

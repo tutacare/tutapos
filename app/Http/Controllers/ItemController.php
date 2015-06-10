@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -17,15 +22,8 @@ class ItemController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
 			$items = Item::all();
 			return view('item.index')->with('item', $items);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -35,14 +33,7 @@ class ItemController extends Controller {
 	 */
 	public function create()
 	{
-		if (Auth::check())
-		{
-			return view('item.create');
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
+		return view('item.create');
 	}
 
 	/**
@@ -52,8 +43,6 @@ class ItemController extends Controller {
 	 */
 	public function store(ItemRequest $request)
 	{
-		if (Auth::check())
-		{
 		    $items = new Item;
             $items->upc_ean_isbn = Input::get('upc_ean_isbn');
             $items->item_name = Input::get('item_name');
@@ -90,11 +79,6 @@ class ItemController extends Controller {
         	}
             Session::flash('message', 'You have successfully added item');
             return Redirect::to('items');
-	    }
-    	else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -116,16 +100,9 @@ class ItemController extends Controller {
 	 */
 	public function edit($id)
 	{
-		if (Auth::check())
-		{
 			$items = Item::find($id);
 	        return view('item.edit')
 	            ->with('item', $items);
-        }
-        else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -136,8 +113,6 @@ class ItemController extends Controller {
 	 */
 	public function update(ItemRequest $request, $id)
 	{
-		if (Auth::check())
-		{
             $items = Item::find($id);
             // process inventory
 			$inventories = new Inventory;
@@ -171,11 +146,6 @@ class ItemController extends Controller {
         	}
             Session::flash('message', 'You have successfully updated item');
             return Redirect::to('items');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -186,18 +156,11 @@ class ItemController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		if (Auth::check())
-		{
 			$items = Item::find($id);
 	        $items->delete();
 
 	        Session::flash('message', 'You have successfully deleted item');
 	        return Redirect::to('items');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 }

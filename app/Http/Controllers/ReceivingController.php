@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 
 class ReceivingController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -20,19 +25,11 @@ class ReceivingController extends Controller {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
-
 			$receivings = Receiving::orderBy('id', 'desc')->first();
 			$suppliers = Supplier::lists('company_name', 'id');
 			return view('receiving.index')
 				->with('receiving', $receivings)
 				->with('supplier', $suppliers);
-		} 
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -52,8 +49,6 @@ class ReceivingController extends Controller {
 	 */
 	public function store()
 	{
-		if (Auth::check())
-		{
 		    $receivings = new Receiving;
             $receivings->supplier_id = Input::get('supplier_id');
             $receivings->user_id = Auth::user()->id;
@@ -87,11 +82,6 @@ class ReceivingController extends Controller {
 	        
             Session::flash('message', 'You have successfully added receivings');
             return Redirect::to('receivings');
-	    }
-    	else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
@@ -124,8 +114,6 @@ class ReceivingController extends Controller {
 	 */
 	public function update($id)
 	{
-		if (Auth::check())
-		{
             $items = Item::find($id);
             // process inventory
 			$receivingTemps = new ReceivingTemp;
@@ -135,11 +123,6 @@ class ReceivingController extends Controller {
 			
             Session::flash('message', 'You have successfully add item');
             return Redirect::to('receivings');
-		}
-		else
-		{
-			return Redirect::to('/auth/login');
-		}
 	}
 
 	/**
