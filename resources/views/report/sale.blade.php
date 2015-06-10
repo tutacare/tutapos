@@ -64,7 +64,7 @@
                             <td>{{ $SaleDetailed->item_id }}</td>
                             <td>{{ $SaleDetailed->item->item_name }}</td>
                             <td>{{ $SaleDetailed->quantity }}</td>
-                            <td>{{ $SaleDetailed->selling_price}}</td>
+                            <td>{{ $SaleDetailed->selling_price * $SaleDetailed->quantity}}</td>
                             <td>{{ ($SaleDetailed->quantity * $SaleDetailed->selling_price) - ($SaleDetailed->quantity * $SaleDetailed->cost_price)}}</td>
                         </tr>
                         @endforeach
