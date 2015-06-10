@@ -12,3 +12,9 @@ Installation
 <li>Migrate your database: php artisan migrate</li>
 <li>View your application in browser</li>
 </ul>
+
+Login using:
+  <ul>
+    <li>email: admin@tuta.pos</li>
+    <li>password: admin</li>
+  </ul>
