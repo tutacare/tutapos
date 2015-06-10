@@ -8,7 +8,14 @@
 				<div class="panel-heading">Reports - Sales Report</div>
 
 				<div class="panel-body">
-
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="well well-sm">TOTAL: {{DB::table('sale_items')->sum('total_selling')}}</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="well well-sm">PROFIT: {{DB::table('sale_items')->sum('total_selling') - DB::table('sale_items')->sum('total_cost')}}</div>
+                        </div>
+                    </div>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>

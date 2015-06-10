@@ -8,7 +8,7 @@
 				<div class="panel-heading">Reports - Receivings Report</div>
 
 				<div class="panel-body">
-
+<div class="well well-sm">TOTAL: {{DB::table('receiving_items')->sum('total_cost')}}</div>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
