@@ -20,5 +20,3 @@ Login using:
   </ul>
 
 See Demo: http://tutapos.mytuta.com<br />
-email: admin@tuta\.pos<br />
-password: admin<br />
