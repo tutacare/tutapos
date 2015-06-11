@@ -57,7 +57,7 @@ class ItemController extends Controller {
 			{
 				$inventories = new Inventory;
 				$inventories->item_id = $items->id;
-				$inventories->employee_id = Auth::user()->id;
+				$inventories->user_id = Auth::user()->id;
 				$inventories->in_out_qty = Input::get('quantity');
 				$inventories->remarks = 'Manual Edit of Quantity';
 				$inventories->save();
@@ -117,7 +117,7 @@ class ItemController extends Controller {
             // process inventory
 			$inventories = new Inventory;
 			$inventories->item_id = $id;
-			$inventories->employee_id = Auth::user()->id;
+			$inventories->user_id = Auth::user()->id;
 			$inventories->in_out_qty = Input::get('quantity')- $items->quantity;
 			$inventories->remarks = 'Manual Edit of Quantity';
 			$inventories->save();
