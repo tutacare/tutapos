@@ -79,9 +79,15 @@ class ReceivingController extends Controller {
 			}
 			//delete all data on ReceivingTemp model
 			ReceivingTemp::truncate();
-	        
+			$itemsreceiving = ReceivingItem::where('receiving_id', $receivingItemsData->receiving_id)->get();
             Session::flash('message', 'You have successfully added receivings');
-            return Redirect::to('receivings');
+            //return Redirect::to('receivings');
+            return view('receiving.complete')
+            	->with('receivings', $receivings)
+            	->with('receivingItemsData', $receivingItemsData)
+            	->with('receivingItems', $itemsreceiving);
+
+
 	}
 
 	/**

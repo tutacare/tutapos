@@ -70,9 +70,9 @@
 
 	@yield('content')
 
-	<footer class="footer">
+	<footer class="footer hidden-print">
       <div class="container">
-        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> v0.3-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.</p>
+        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> v0.4-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.</p>
       </div>
     </footer>
 	<!-- Scripts -->

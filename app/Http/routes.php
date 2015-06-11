@@ -45,6 +45,8 @@ Route::resource('api/item', 'ReceivingApiController');
 Route::resource('api/receivingtemp', 'ReceivingTempApiController');
 
 Route::resource('api/saletemp', 'SaleTempApiController');
+
+Route::get('tester', 'TesterController@index');
 /*
 Route::group(['middleware' => 'role'], function()
     {

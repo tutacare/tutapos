@@ -86,6 +86,13 @@ class EmployeeController extends Controller {
 	 */
 	public function update($id)
 	{
+		if($id == 1)
+		{
+			Session::flash('message', 'You cannot edit admin on TutaPOS demo');
+	            return Redirect::to('employees');
+		}
+		else
+		{	
 			$rules = array(
 			'name' => 'required',
 			'email' => 'required|email|unique:users,email,' . $id .'',
@@ -109,6 +116,7 @@ class EmployeeController extends Controller {
 	            Session::flash('message', 'You have successfully updated employee');
 	            return Redirect::to('employees');
 	        }
+	    }
 	}
 
 	/**
@@ -119,11 +127,19 @@ class EmployeeController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		if($id == 1)
+		{
+			Session::flash('message', 'You cannot delete admin on TutaPOS demo');
+	            return Redirect::to('employees');
+		}
+		else
+		{		
 			$users = User::find($id);
 	        $users->delete();
 	        // redirect
 	        Session::flash('message', 'You have successfully deleted employee');
 	        return Redirect::to('employees');
+	    }
 	}
 
 }
