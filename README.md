@@ -15,6 +15,10 @@ Installation
 
 Login using:
   <ul>
-    <li>email: admin@tuta.pos</li>
+    <li>email: admin@tuta\.pos</li>
     <li>password: admin</li>
   </ul>
+
+See Demo: http://tutapos.mytuta.com<br />
+email: admin@tuta\.pos<br />
+password: admin<br />
