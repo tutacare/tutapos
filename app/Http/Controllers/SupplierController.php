@@ -144,11 +144,19 @@ class SupplierController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		try
+		{
 		$suppliers = Supplier::find($id);
         $suppliers->delete();
-
         Session::flash('message', 'You have successfully deleted supplier');
         return Redirect::to('suppliers');
+        }
+    	catch(\Illuminate\Database\QueryException $e)
+		{
+    		Session::flash('message', 'Integrity constraint violation: You Cannot delete a parent row');
+    		Session::flash('alert-class', 'alert-danger');
+	        return Redirect::to('suppliers');	
+    	}
 	}
 
 }

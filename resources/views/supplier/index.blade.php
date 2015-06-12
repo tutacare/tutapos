@@ -11,7 +11,7 @@
 				<a class="btn btn-small btn-success" href="{{ URL::to('suppliers/create') }}">New Supplier</a>
 				<hr />
 @if (Session::has('message'))
-	<div class="alert alert-info">{{ Session::get('message') }}</div>
+    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
 @endif
 
 <table class="table table-striped table-bordered">

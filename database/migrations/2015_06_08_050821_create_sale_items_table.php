@@ -15,8 +15,10 @@ class CreateSaleItemsTable extends Migration {
 		Schema::create('sale_items', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('sale_id');
-			$table->integer('item_id');
+			$table->integer('sale_id')->unsigned();
+			$table->foreign('sale_id')->references('id')->on('sales')->onDelete('restrict');
+			$table->integer('item_id')->unsigned();
+			$table->foreign('item_id')->references('id')->on('items')->onDelete('restrict');
 			$table->decimal('cost_price',9, 2);
 			$table->decimal('selling_price',9, 2);
 			$table->integer('quantity');

@@ -134,11 +134,20 @@ class EmployeeController extends Controller {
 		}
 		else
 		{		
-			$users = User::find($id);
-	        $users->delete();
-	        // redirect
-	        Session::flash('message', 'You have successfully deleted employee');
-	        return Redirect::to('employees');
+			try 
+			{
+				$users = User::find($id);
+		        $users->delete();
+		        // redirect
+		        Session::flash('message', 'You have successfully deleted employee');
+		        return Redirect::to('employees');
+	    	}
+	    	catch(\Illuminate\Database\QueryException $e)
+    		{
+        		Session::flash('message', 'Integrity constraint violation: You Cannot delete a parent row');
+        		Session::flash('alert-class', 'alert-danger');
+		        return Redirect::to('employees');	
+	    	}
 	    }
 	}
 

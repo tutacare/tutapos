@@ -142,11 +142,20 @@ class CustomerController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		try
+		{
 			$customers = Customer::find($id);
 	        $customers->delete();
 	        // redirect
 	        Session::flash('message', 'You have successfully deleted customer');
 	        return Redirect::to('customers');
+        }
+    	catch(\Illuminate\Database\QueryException $e)
+		{
+    		Session::flash('message', 'Integrity constraint violation: You Cannot delete a parent row');
+    		Session::flash('alert-class', 'alert-danger');
+	        return Redirect::to('customers');	
+    	}
 	}
 
 }
