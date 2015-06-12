@@ -81,9 +81,14 @@ class SaleController extends Controller {
 		}
 		//delete all data on SaleTemp model
 		SaleTemp::truncate();
-        
-        Session::flash('message', 'You have successfully added sales');
-        return Redirect::to('sales');
+        $itemssale = SaleItem::where('sale_id', $saleItemsData->sale_id)->get();
+            Session::flash('message', 'You have successfully added sales');
+            //return Redirect::to('receivings');
+            return view('sale.complete')
+            	->with('sales', $sales)
+            	->with('saleItemsData', $saleItemsData)
+            	->with('saleItems', $itemssale);
+
 	}
 
 	/**

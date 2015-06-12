@@ -15,9 +15,9 @@ table td {
     </div>
     <div class="row">
         <div class="col-md-12">
-            Supplier: {{ $receivings->supplier->company_name}}<br />
-            Receiving ID: RECV{{$receivingItemsData->receiving_id}}<br />
-            Employee: {{$receivings->user->name}}<br />
+            Customer: {{ $sales->customer->name}}<br />
+            Sale ID: SALE{{$saleItemsData->sale_id}}<br />
+            Employee: {{$sales->user->name}}<br />
         </div>
     </div>
     <div class="row">
@@ -30,12 +30,12 @@ table td {
                     <td>Qty</td>
                     <td>Total</td>
                 </tr>
-                @foreach($receivingItems as $value)
+                @foreach($saleItems as $value)
                 <tr>
                     <td>{{$value->item->item_name}}</td>
-                    <td>{{$value->cost_price}}</td>
+                    <td>{{$value->selling_price}}</td>
                     <td>{{$value->quantity}}</td>
-                    <td>{{$value->total_cost}}</td>
+                    <td>{{$value->total_selling}}</td>
                 </tr>
                 @endforeach
             </table>
@@ -44,7 +44,7 @@ table td {
     </div>
     <div class="row">
         <div class="col-md-12">
-            Payment Type: {{$receivings->payment_type}}
+            Payment Type: {{$sales->payment_type}}
         </div>
     </div>
     <hr class="hidden-print"/>
@@ -56,7 +56,7 @@ table td {
             <button type="button" onclick="printInvoice()" class="btn btn-info pull-right hidden-print">Print</button> 
         </div>
         <div class="col-md-2">
-            <a href="{{ url('/receivings') }}" type="button" class="btn btn-info pull-right hidden-print">New Receiving</a>
+            <a href="{{ url('/sales') }}" type="button" class="btn btn-info pull-right hidden-print">New Sale</a>
         </div>
     </div>
 </div>
