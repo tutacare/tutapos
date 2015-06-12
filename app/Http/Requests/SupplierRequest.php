@@ -11,11 +11,7 @@ class SupplierRequest extends Request {
 	 */
 	public function authorize()
 	{
-		$image = $this->avatar;
-		if(empty($image))
-			return true;
-		else 
-			return false;
+		return true;
 	}
 
 	/**

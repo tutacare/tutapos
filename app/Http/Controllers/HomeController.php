@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Item, App\Customer, App\Sale;
+
 class HomeController extends Controller {
 
 	/*
@@ -30,7 +32,13 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$items = Item::count();
+		$customers = Customer::count();
+		$sales = Sale::count();
+		return view('home')
+			->with('items', $items)
+			->with('customers', $customers)
+			->with('sales', $sales);
 	}
 
 }
