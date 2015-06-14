@@ -19,18 +19,23 @@
         <tr>
             <td>Item Kit ID</td>
             <td>Item Kit Name</td>
+            <td>Cost Price</td>
+            <td>Selling Price</td>
             <td>Item Kit Description</td>
             <td>&nbsp;</td>
         </tr>
     </thead>
     <tbody>
-   
+        @foreach($itemkits as $value)
         <tr>
-            <td>..</td>
-            <td>..</td>
-            <td>..</td>
+            <td>{{$value->id}}</td>
+            <td>{{$value->name}}</td>
+            <td>{{$value->cost_price}}</td>
+            <td>{{$value->selling_price}}</td>
+            <td>{{$value->description}}</td>
             <td>..</td>
         </tr>
+        @endforeach
     
     </tbody>
 </table>

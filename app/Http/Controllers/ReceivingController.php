@@ -8,6 +8,7 @@ use App\ReceivingItem;
 use App\Inventory;
 use App\Supplier;
 use App\Item;
+use App\Http\Requests\ReceivingRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class ReceivingController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(ReceivingRequest $request)
 	{
 		    $receivings = new Receiving;
             $receivings->supplier_id = Input::get('supplier_id');

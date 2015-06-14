@@ -14,7 +14,8 @@
                 @if (Session::has('message'))
                     <div class="alert alert-success">{{ Session::get('message') }}</div>
                 @endif
-
+                {!! Html::ul($errors->all()) !!}
+                
                 <div class="row" ng-controller="SearchItemCtrl">
 
                     <div class="col-md-3">

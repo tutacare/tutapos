@@ -35,8 +35,7 @@
             <td>{{ $value->payment_type }}</td>
             <td>{{ $value->comments }}</td>
             <td>
-                <a class="btn btn-small btn-info" data-toggle="collapse" href="#detailedReceivings{{ $value->id }}" aria-expanded="false" aria-controls="detailedReceivings">
-                    Detail</a>
+                <a class="btn btn-small btn-info" data-toggle="collapse" href="#detailedReceivings{{ $value->id }}" aria-expanded="false" aria-controls="detailedReceivings">Detail</a>
             </td>
         </tr>
         

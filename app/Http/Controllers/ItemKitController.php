@@ -22,7 +22,8 @@ class ItemKitController extends Controller
      */
     public function index()
     {
-        return view('itemkit.index');
+        $itemkits = ItemKit::all();
+        return view('itemkit.index')->with('itemkits', $itemkits);
     }
 
     /**
@@ -101,6 +102,8 @@ class ItemKitController extends Controller
     {
             $itemkits = new ItemKit;
             $itemkits->name = Input::get('item_kit_name');
+            $itemkits->cost_price = Input::get('cost_price');
+            $itemkits->selling_price = Input::get('selling_price');
             $itemkits->description = Input::get('description');
             $itemkits->save();
             // process receiving items

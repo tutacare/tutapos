@@ -8,6 +8,7 @@ use App\SaleItem;
 use App\Inventory;
 use App\Customer;
 use App\Item;
+use App\Http\Requests\SaleRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class SaleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(SaleRequest $request)
 	{
 	    $sales = new Sale;
         $sales->customer_id = Input::get('customer_id');
