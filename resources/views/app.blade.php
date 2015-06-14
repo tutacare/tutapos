@@ -38,6 +38,7 @@
 					@if (Auth::check())
 						<li><a href="{{ url('/customers') }}">Customers</a></li>
 						<li><a href="{{ url('/items') }}">Items</a></li>
+						<li><a href="{{ url('/item-kits') }}">Item Kits</a></li>
 						<li><a href="{{ url('/suppliers') }}">Suppliers</a></li>
 						<li><a href="{{ url('/receivings') }}">Receivings</a></li>
 						<li><a href="{{ url('/sales') }}">Sales</a></li>
@@ -72,7 +73,7 @@
 
 	<footer class="footer hidden-print">
       <div class="container">
-        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> v0.7-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.
+        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> v0.8-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.
         </p>
       </div>
     </footer>

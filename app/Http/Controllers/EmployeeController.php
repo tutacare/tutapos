@@ -89,6 +89,7 @@ class EmployeeController extends Controller {
 		if($id == 1)
 		{
 			Session::flash('message', 'You cannot edit admin on TutaPOS demo');
+			Session::flash('alert-class', 'alert-danger');
 	            return Redirect::to('employees');
 		}
 		else
@@ -130,6 +131,7 @@ class EmployeeController extends Controller {
 		if($id == 1)
 		{
 			Session::flash('message', 'You cannot delete admin on TutaPOS demo');
+			Session::flash('alert-class', 'alert-danger');
 	            return Redirect::to('employees');
 		}
 		else

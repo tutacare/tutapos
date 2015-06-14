@@ -30,6 +30,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 Route::resource('customers', 'CustomerController');
 Route::resource('items', 'ItemController');
+Route::resource('item-kits', 'ItemKitController');
 Route::resource('inventory', 'InventoryController');
 Route::resource('suppliers', 'SupplierController');
 Route::resource('receivings', 'ReceivingController');
@@ -46,7 +47,9 @@ Route::resource('api/receivingtemp', 'ReceivingTempApiController');
 
 Route::resource('api/saletemp', 'SaleTempApiController');
 
-Route::get('tester', 'TesterController@index');
+Route::resource('api/itemkittemp', 'ItemKitController');
+Route::get('api/item-kit-temp', 'ItemKitController@itemKitApi');
+Route::post('store-item-kits', 'ItemKitController@storeItemKits');
 /*
 Route::group(['middleware' => 'role'], function()
     {
