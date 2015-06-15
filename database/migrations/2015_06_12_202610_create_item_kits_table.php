@@ -16,6 +16,8 @@ class CreateItemKitsTable extends Migration
         {
             $table->increments('id');
             $table->string('name', 255);
+            $table->decimal('cost_price', 15, 2);
+            $table->decimal('selling_price', 15, 2);
             $table->string('description', 255);
             $table->timestamps();
         });

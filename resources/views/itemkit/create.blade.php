@@ -14,6 +14,7 @@
                 @if (Session::has('message'))
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
+                {!! Html::ul($errors->all()) !!}
 
                 <div class="row" ng-controller="SearchItemCtrl">
 
@@ -59,37 +60,41 @@
                         <table class="table table-bordered">
                             <tr><th>Item ID</th><th>Item Name</th><th>Quantity</th><th>&nbsp;</th></tr>
                             <tr ng-repeat="newitemkittemp in itemkittemp">
-                            <td>@{{newitemkittemp.item_id}}</td><td>@{{newitemkittemp.item.item_name}}</td><td><input type="text" style="text-align:center" autocomplete="off" name="quantity" ng-change="updateReceivingTemp(newitemkittemp)" ng-model="newitemkittemp.quantity" size="2"></td><td><button class="btn btn-danger btn-xs" type="button" ng-click="removeItemKitTemp(newitemkittemp.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                            <td>@{{newitemkittemp.item_id}}</td><td>@{{newitemkittemp.item.item_name}}</td><td><input type="text" style="text-align:center" autocomplete="off" name="quantity" ng-change="updateItemKitTemp(newitemkittemp)" ng-model="newitemkittemp.quantity" size="2"></td><td><button class="btn btn-danger btn-xs" type="button" ng-click="removeItemKitTemp(newitemkittemp.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
                             </tr>
                         </table>
 
                         <div class="row">    
                                 <div class="col-md-7">
                                     <div class="form-group">
-                                        <label for="total" class="col-sm-4 control-label">Cost Price</label>
+                                        <label for="cost_price" class="col-sm-4 control-label">Cost Price</label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
+                                                
+                                                <input type="text" class="form-control" name="cost_price_ori" id="cost_price_ori" ng-model="sumCost(itemkittemp)" readonly/>
                                                 <div class="input-group-addon">$</div>
-                                                <input type="text" class="form-control" name="cost_price" id="cost_price"/>
+                                                <input type="text" class="form-control" name="cost_price" id="cost_price" ng-model="cp"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div>&nbsp;</div>
                                     <div class="form-group">
-                                        <label for="employee" class="col-sm-4 control-label">Selling Price</label>
+                                        <label for="selling_price" class="col-sm-4 control-label">Selling Price</label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
-                                                <div class="input-group-addon">$</div>
-                                        <input type="text" class="form-control" name="selling_price" id="selling_price" />
+                                                
+                                        <input type="text" class="form-control" name="selling_price_ori" id="selling_price_ori" ng-model="sumSell(itemkittemp)" readonly/>
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" name="selling_price" id="selling_price" ng-model="sp"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="supplier_id" class="col-sm-4 control-label">TOTAL:</label>
+                                        <label for="supplier_id" class="col-sm-4 control-label">PROFIT:</label>
                                         <div class="col-sm-8">
-                                            <p class="form-control-static"><b>@{{sum(receivingtemp) | currency}}</b></p>
+                                            <p class="form-control-static"><b>@{{sp - cp}}</b></p>
                                         </div>
                                     </div>
                                     <div>&nbsp;</div>

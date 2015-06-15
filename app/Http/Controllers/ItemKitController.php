@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ItemKit, App\ItemKitItem, App\ItemKitItemTemp;
 use App\Item;
 use App\Http\Requests;
+use App\Http\Requests\ItemKitRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session, \Response;
 use App\Http\Controllers\Controller;
 
@@ -46,6 +47,10 @@ class ItemKitController extends Controller
         $ItemKitItemTemps = new ItemKitItemTemp;
         $ItemKitItemTemps->item_id = Input::get('item_id');
         $ItemKitItemTemps->quantity = 1;
+        $ItemKitItemTemps->cost_price = Input::get('cost_price');
+        $ItemKitItemTemps->selling_price = Input::get('selling_price');
+        $ItemKitItemTemps->total_cost_price = Input::get('cost_price');
+        $ItemKitItemTemps->total_selling_price = Input::get('selling_price');
         $ItemKitItemTemps->save();
         return $ItemKitItemTemps;
     }
@@ -80,7 +85,10 @@ class ItemKitController extends Controller
      */
     public function update($id)
     {
-        //
+        $ItemKitItemTemps = ItemKitItemTemp::find($id);
+        $ItemKitItemTemps->quantity = Input::get('quantity');
+        $ItemKitItemTemps->save();
+        return $ItemKitItemTemps;
     }
 
     /**
@@ -98,7 +106,7 @@ class ItemKitController extends Controller
     {
         return Response::json(ItemKitItemTemp::with('item')->get());
     }
-    public function storeItemKits()
+    public function storeItemKits(ItemKitRequest $request)
     {
             $itemkits = new ItemKit;
             $itemkits->name = Input::get('item_kit_name');

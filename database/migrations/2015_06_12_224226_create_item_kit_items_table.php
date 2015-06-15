@@ -17,7 +17,11 @@ class CreateItemKitItemsTable extends Migration
             $table->increments('id');
             $table->integer('item_kit_id')->unsigned();
             $table->foreign('item_kit_id')->references('id')->on('item_kits')->onDelete('restrict');
+            $table->decimal('cost_price', 15, 2);
+            $table->decimal('selling_price', 15, 2);
             $table->integer('quantity');
+            $table->decimal('total_cost_price', 15, 2);
+            $table->decimal('total_selling_price', 15, 2);
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@
             $scope.itemkittemp = data;
         });
         $scope.addItemKitTemp = function(item) {
-            $http.post('../../api/itemkittemp', { item_id: item.id }).
+            $http.post('../../api/itemkittemp', { item_id: item.id, cost_price: item.cost_price, selling_price: item.selling_price }).
             success(function(data, status, headers, config) {
                 $scope.itemkittemp.push(data);
                     $http.get('../../api/item-kit-temp').success(function(data) {
@@ -20,8 +20,8 @@
                     });
             });
         }
-        $scope.updateReceivingTemp = function(newreceivingtemp) {
-            $http.put('api/receivingtemp/' + newreceivingtemp.id, { quantity: newreceivingtemp.quantity, total_cost: newreceivingtemp.item.cost_price * newreceivingtemp.quantity }).
+        $scope.updateItemKitTemp = function(newitemkittemp) {
+            $http.put('../../api/itemkittemp/' + newitemkittemp.id, { quantity: newitemkittemp.quantity }).
             success(function(data, status, headers, config) {
                 });
         }
@@ -33,13 +33,21 @@
                         });
                 });
         }     
-        $scope.sum = function(list) {
+        $scope.sumCost = function(list) {
             var total=0;
-            angular.forEach(list , function(newreceivingtemp){
-                total+= parseFloat(newreceivingtemp.item.cost_price * newreceivingtemp.quantity);
+            angular.forEach(list , function(newitemkittemp){
+                total+= parseFloat(newitemkittemp.item.cost_price * newitemkittemp.quantity);
             });
             return total;
         }
+        $scope.sumSell = function(list) {
+            var total=0;
+            angular.forEach(list , function(newitemkittemp){
+                total+= parseFloat(newitemkittemp.item.selling_price * newitemkittemp.quantity);
+            });
+            return total;
+        }
+
 
     }]);
 })();

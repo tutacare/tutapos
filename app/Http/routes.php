@@ -50,6 +50,7 @@ Route::resource('api/saletemp', 'SaleTempApiController');
 Route::resource('api/itemkittemp', 'ItemKitController');
 Route::get('api/item-kit-temp', 'ItemKitController@itemKitApi');
 Route::post('store-item-kits', 'ItemKitController@storeItemKits');
+
 /*
 Route::group(['middleware' => 'role'], function()
     {
