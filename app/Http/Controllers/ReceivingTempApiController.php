@@ -57,10 +57,11 @@ class ReceivingTempApiController extends Controller {
 			$itemkits = ItemKitItem::where('item_kit_id', Input::get('item_id'))->get();
 			foreach($itemkits as $value)
 			{
+				$item = Item::where('id', $value->item_id)->first();	
 				$ReceivingTemps = new ReceivingTemp;
 				$ReceivingTemps->item_id = $value->item_id;
-				$ReceivingTemps->cost_price = $value->cost_price;
-				$ReceivingTemps->total_cost = $value->cost_price;
+				$ReceivingTemps->cost_price = $item->cost_price;
+				$ReceivingTemps->total_cost = $item->cost_price * $value->quantity;
 				$ReceivingTemps->quantity = $value->quantity;
 				$ReceivingTemps->save();
 				//return $ReceivingTemps;

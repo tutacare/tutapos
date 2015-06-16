@@ -7,7 +7,7 @@ use App\SaleTemp;
 use App\SaleItem;
 use App\Inventory;
 use App\Customer;
-use App\Item;
+use App\Item, App\ItemKitItem;
 use App\Http\Requests\SaleRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
 use Illuminate\Http\Request;
@@ -70,15 +70,35 @@ class SaleController extends Controller {
 			$saleItemsData->save();
 			//process inventory
 			$items = Item::find($value->item_id);
-			$inventories = new Inventory;
-			$inventories->item_id = $value->item_id;
-			$inventories->user_id = Auth::user()->id;
-			$inventories->in_out_qty = -($value->quantity);
-			$inventories->remarks = 'SALE'.$sales->id;
-			$inventories->save();
-			//process item quantity
-            $items->quantity = $items->quantity - $value->quantity;
-            $items->save();
+			if($items->type == 1)
+			{
+				$inventories = new Inventory;
+				$inventories->item_id = $value->item_id;
+				$inventories->user_id = Auth::user()->id;
+				$inventories->in_out_qty = -($value->quantity);
+				$inventories->remarks = 'SALE'.$sales->id;
+				$inventories->save();
+				//process item quantity
+	            $items->quantity = $items->quantity - $value->quantity;
+	            $items->save();
+        	}
+        	else
+        	{
+	        	$itemkits = ItemKitItem::where('item_kit_id', $value->item_id)->get();
+				foreach($itemkits as $item_kit_value)
+				{
+					$inventories = new Inventory;
+					$inventories->item_id = $item_kit_value->item_id;
+					$inventories->user_id = Auth::user()->id;
+					$inventories->in_out_qty = -($item_kit_value->quantity * $value->quantity);
+					$inventories->remarks = 'IK-SALE'.$sales->id;
+					$inventories->save();
+					//process item quantity
+					$item_quantity = Item::find($item_kit_value->item_id);
+		            $item_quantity->quantity = $item_quantity->quantity - ($item_kit_value->quantity * $value->quantity);
+		            $item_quantity->save();
+				}
+        	}
 		}
 		//delete all data on SaleTemp model
 		SaleTemp::truncate();
