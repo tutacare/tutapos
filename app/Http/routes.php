@@ -49,6 +49,7 @@ Route::resource('api/saletemp', 'SaleTempApiController');
 
 Route::resource('api/itemkittemp', 'ItemKitController');
 Route::get('api/item-kit-temp', 'ItemKitController@itemKitApi');
+Route::get('api/item-kits', 'ItemKitController@itemKits');
 Route::post('store-item-kits', 'ItemKitController@storeItemKits');
 
 /*

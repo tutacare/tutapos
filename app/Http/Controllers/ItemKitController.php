@@ -106,10 +106,14 @@ class ItemKitController extends Controller
     {
         return Response::json(ItemKitItemTemp::with('item')->get());
     }
+    public function itemKits()
+    {
+        return Response::json(Item::get());
+    }
     public function storeItemKits(ItemKitRequest $request)
     {
             $itemkits = new ItemKit;
-            $itemkits->name = Input::get('item_kit_name');
+            $itemkits->item_name = Input::get('item_kit_name');
             $itemkits->cost_price = Input::get('cost_price');
             $itemkits->selling_price = Input::get('selling_price');
             $itemkits->description = Input::get('description');
@@ -119,6 +123,7 @@ class ItemKitController extends Controller
             foreach ($item_kit_items as $value) {
                 $item_kit_items_data = new ItemKitItem;
                 $item_kit_items_data->item_kit_id = $itemkits->id;
+                $item_kit_items_data->item_id = $value->item_id;
                 $item_kit_items_data->quantity = $value->quantity;
                 $item_kit_items_data->save();
             }

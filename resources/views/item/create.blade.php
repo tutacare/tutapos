@@ -8,6 +8,9 @@
 				<div class="panel-heading">New Item</div>
 
 				<div class="panel-body">
+					@if (Session::has('message'))
+					<div class="alert alert-info">{{ Session::get('message') }}</div>
+					@endif
 					{!! Html::ul($errors->all()) !!}
 
 					{!! Form::open(array('url' => 'items', 'files' => true)) !!}

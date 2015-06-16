@@ -29,7 +29,7 @@
         @foreach($itemkits as $value)
         <tr>
             <td>{{$value->id}}</td>
-            <td>{{$value->name}}</td>
+            <td>{{$value->item_name}}</td>
             <td>{{$value->cost_price}}</td>
             <td>{{$value->selling_price}}</td>
             <td>{{$value->description}}</td>

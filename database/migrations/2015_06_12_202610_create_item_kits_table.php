@@ -15,10 +15,11 @@ class CreateItemKitsTable extends Migration
         Schema::create('item_kits', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('name', 255);
+            $table->string('item_name', 255);
             $table->decimal('cost_price', 15, 2);
             $table->decimal('selling_price', 15, 2);
             $table->string('description', 255);
+            $table->integer('type')->default(2);
             $table->timestamps();
         });
     }

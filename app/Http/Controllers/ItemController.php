@@ -78,7 +78,7 @@ class ItemController extends Controller {
 	            $itemAvatar->save();
         	}
             Session::flash('message', 'You have successfully added item');
-            return Redirect::to('items');
+            return Redirect::to('items/create');
 	}
 
 	/**

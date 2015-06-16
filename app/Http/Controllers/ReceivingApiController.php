@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Item;
+use App\Item, App\ItemKit, App\ItemKitItem;
 use \Auth, \Redirect, \Validator, \Input, \Session, \Response;
 use Illuminate\Http\Request;
 
@@ -20,7 +20,11 @@ class ReceivingApiController extends Controller {
 	 */
 	public function index()
 	{
-		return Response::json(Item::get());
+		$items = Item::get();
+		$itemkits = ItemKit::with('itemkititem')->get();
+		$array = array_merge($items->toArray(), $itemkits->toArray());
+		return Response::json($array);
+		//return Response::json(ItemKit::with('itemkititem')->get());
 	}
 
 	/**

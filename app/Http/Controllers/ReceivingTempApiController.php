@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ReceivingTemp;
-use App\Item;
+use App\Item, App\ItemKitItem;
 use \Auth, \Redirect, \Validator, \Input, \Session, \Response;
 use Illuminate\Http\Request;
 
@@ -41,13 +41,32 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function store()
 	{
-		$ReceivingTemps = new ReceivingTemp;
-		$ReceivingTemps->item_id = Input::get('item_id');
-		$ReceivingTemps->cost_price = Input::get('cost_price');
-		$ReceivingTemps->total_cost = Input::get('total_cost');
-		$ReceivingTemps->quantity = 1;
-		$ReceivingTemps->save();
-		return $ReceivingTemps;
+		$type = Input::get('type');
+		if ($type == 1)
+		{
+			$ReceivingTemps = new ReceivingTemp;
+			$ReceivingTemps->item_id = Input::get('item_id');
+			$ReceivingTemps->cost_price = Input::get('cost_price');
+			$ReceivingTemps->total_cost = Input::get('total_cost');
+			$ReceivingTemps->quantity = 1;
+			$ReceivingTemps->save();
+			return $ReceivingTemps;
+		}
+		else
+		{
+			$itemkits = ItemKitItem::where('item_kit_id', Input::get('item_id'))->get();
+			foreach($itemkits as $value)
+			{
+				$ReceivingTemps = new ReceivingTemp;
+				$ReceivingTemps->item_id = $value->item_id;
+				$ReceivingTemps->cost_price = $value->cost_price;
+				$ReceivingTemps->total_cost = $value->cost_price;
+				$ReceivingTemps->quantity = $value->quantity;
+				$ReceivingTemps->save();
+				//return $ReceivingTemps;
+			}
+				return $ReceivingTemps;
+		}
 	}
 
 	/**

@@ -23,6 +23,7 @@ class CreateItemsTable extends Migration {
 			$table->decimal('cost_price',9, 2);
 			$table->decimal('selling_price',9, 2);
 			$table->integer('quantity');
+			$table->integer('type')->default(1);
 			$table->timestamps();
 		});
 	}
