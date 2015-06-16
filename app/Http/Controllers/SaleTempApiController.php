@@ -21,6 +21,7 @@ class SaleTempApiController extends Controller {
 	 */
 	public function index()
 	{
+		
 		return Response::json(SaleTemp::with('item')->get());
 	}
 

@@ -22,7 +22,7 @@ class ItemController extends Controller {
 	 */
 	public function index()
 	{
-			$items = Item::all();
+			$items = Item::where('type', 1)->get();
 			return view('item.index')->with('item', $items);
 	}
 

@@ -24,7 +24,8 @@
                         <table class="table table-hover">
                         <tr ng-repeat="item in items  | filter: searchKeyword | limitTo:10">
 
-                        <td>@{{item.item_name}}</td><td><button class="btn btn-success btn-xs" type="button" ng-click="addSaleTemp(item, newsaletemp)"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button></td>
+                        <td>@{{item.item_name}}</td>
+                        <td><button class="btn btn-success btn-xs" type="button" ng-click="addSaleTemp(item, newsaletemp)"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button></td>
 
                         </tr>
                         </table>

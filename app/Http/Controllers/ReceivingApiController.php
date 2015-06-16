@@ -20,11 +20,11 @@ class ReceivingApiController extends Controller {
 	 */
 	public function index()
 	{
-		$items = Item::get();
-		$itemkits = ItemKit::with('itemkititem')->get();
-		$array = array_merge($items->toArray(), $itemkits->toArray());
-		return Response::json($array);
-		//return Response::json(ItemKit::with('itemkititem')->get());
+		//$items = Item::get();
+		//$itemkits = ItemKit::with('itemkititem')->get();
+		//$array = array_merge($items->toArray(), $itemkits->toArray());
+		//return Response::json($array);
+		return Response::json(Item::get());
 	}
 
 	/**
