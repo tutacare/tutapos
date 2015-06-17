@@ -34,10 +34,10 @@
             <td>{{ $value->phone_number }}</td>
             <td>
 
-                <a class="btn btn-small btn-info" href="{{ URL::to('customers/' . $value->id . '/edit') }}">Edit</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('customers/' . $value->id . '/edit') }}">{{trans('customer.edit')}}</a>
                 {!! Form::open(array('url' => 'customers/' . $value->id, 'class' => 'pull-right')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
-                    {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
+                    {!! Form::submit(trans('customer.delete'), array('class' => 'btn btn-warning')) !!}
                 {!! Form::close() !!}
             </td>
             <td>{!! Html::image(url() . '/images/customers/' . $value->avatar, 'a picture', array('class' => 'thumb')) !!}</td>

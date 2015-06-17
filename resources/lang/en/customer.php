@@ -17,5 +17,8 @@ return [
 	'company_name'		=> 'Company Name',
 	'account'			=> 'Account',
 	'submit'			=> 'Submit',
+	'edit'	=> 'Edit',
+	'delete'	=> 'Delete',
+	'update_customer' => 'Update Customer',
 
 ];

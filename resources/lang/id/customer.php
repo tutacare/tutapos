@@ -15,8 +15,10 @@ return [
 	'state'				=> 'Provinsi',
 	'zip'				=> 'Kode Pos',
 	'company_name'		=> 'Nama Perusahaan',
-	'Account'			=> 'Akun',
-	'Submit'			=> 'Submit'
-
+	'account'			=> 'Akun',
+	'Submit'			=> 'Submit',
+	'edit'	=> 'Ganti',
+	'delete' => 'Hapus',
+	'update_customer' => 'Ganti Pelanggan',
 
 ];
