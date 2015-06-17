@@ -5,10 +5,10 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">List Customers</div>
+				<div class="panel-heading">{{trans('customer.list_customers')}}</div>
 
 				<div class="panel-body">
-				<a class="btn btn-small btn-success" href="{{ URL::to('customers/create') }}">New Customer</a>
+				<a class="btn btn-small btn-success" href="{{ URL::to('customers/create') }}">{{trans('customer.new_customer')}}</a>
 				<hr />
 @if (Session::has('message'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
@@ -17,12 +17,12 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Person ID</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Phone Number</td>
+            <td>{{trans('customer.customer_id')}}</td>
+            <td>{{trans('customer.name')}}</td>
+            <td>{{trans('customer.email')}}</td>
+            <td>{{trans('customer.phone_number')}}</td>
             <td>&nbsp;</td>
-            <td>Avatar</td>
+            <td>{{trans('customer.avatar')}}</td>
         </tr>
     </thead>
     <tbody>

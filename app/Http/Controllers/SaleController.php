@@ -91,7 +91,7 @@ class SaleController extends Controller {
 					$inventories->item_id = $item_kit_value->item_id;
 					$inventories->user_id = Auth::user()->id;
 					$inventories->in_out_qty = -($item_kit_value->quantity * $value->quantity);
-					$inventories->remarks = 'IK-SALE'.$sales->id;
+					$inventories->remarks = 'SALE'.$sales->id;
 					$inventories->save();
 					//process item quantity
 					$item_quantity = Item::find($item_kit_value->item_id);

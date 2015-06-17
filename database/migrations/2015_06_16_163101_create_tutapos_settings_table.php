@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemKitsTable extends Migration
+class CreateTutaposSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,10 @@ class CreateItemKitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_kits', function(Blueprint $table)
+        Schema::create('tutapos_settings', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('item_name', 255);
-            $table->decimal('cost_price', 15, 2);
-            $table->decimal('selling_price', 15, 2);
-            $table->string('description', 255);
-            $table->integer('type')->default(2);
+            $table->string('languange', 5)->default('en');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateItemKitsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('item_kits');
+        Schema::drop('tutapos_settings');
     }
 }

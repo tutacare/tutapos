@@ -49,8 +49,6 @@ class ItemKitController extends Controller
         $ItemKitItemTemps->quantity = 1;
         $ItemKitItemTemps->cost_price = Input::get('cost_price');
         $ItemKitItemTemps->selling_price = Input::get('selling_price');
-        $ItemKitItemTemps->total_cost_price = Input::get('cost_price');
-        $ItemKitItemTemps->total_selling_price = Input::get('selling_price');
         $ItemKitItemTemps->save();
         return $ItemKitItemTemps;
     }

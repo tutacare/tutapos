@@ -34,22 +34,22 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Dashboard</a></li>
+					<li><a href="{{ url('/') }}">{{trans('menu.dashboard')}}</a></li>
 					@if (Auth::check())
-						<li><a href="{{ url('/customers') }}">Customers</a></li>
-						<li><a href="{{ url('/items') }}">Items</a></li>
-						<li><a href="{{ url('/item-kits') }}">Item Kits</a></li>
-						<li><a href="{{ url('/suppliers') }}">Suppliers</a></li>
-						<li><a href="{{ url('/receivings') }}">Receivings</a></li>
-						<li><a href="{{ url('/sales') }}">Sales</a></li>
+						<li><a href="{{ url('/customers') }}">{{trans('menu.customers')}}</a></li>
+						<li><a href="{{ url('/items') }}">{{trans('menu.items')}}</a></li>
+						<li><a href="{{ url('/item-kits') }}">{{trans('menu.item_kits')}}</a></li>
+						<li><a href="{{ url('/suppliers') }}">{{trans('menu.suppliers')}}</a></li>
+						<li><a href="{{ url('/receivings') }}">{{trans('menu.receivings')}}</a></li>
+						<li><a href="{{ url('/sales') }}">{{trans('menu.sales')}}</a></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{trans('menu.reports')}} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/reports/receivings') }}">Receivings</a></li>
-								<li><a href="{{ url('/reports/sales') }}">Sales</a></li>
+								<li><a href="{{ url('/reports/receivings') }}">{{trans('menu.receivings_report')}}</a></li>
+								<li><a href="{{ url('/reports/sales') }}">{{trans('menu.sales_report')}}</a></li>
 							</ul>
 						</li>
-						<li><a href="{{ url('/employees') }}">Employees</a></li>
+						<li><a href="{{ url('/employees') }}">{{trans('menu.employees')}}</a></li>
 					@endif
 				</ul>
 
@@ -60,7 +60,9 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ url('/tutapos-settings') }}">{{trans('menu.application_settings')}}</a></li>
+								<li class="divider"></li>
+								<li><a href="{{ url('/auth/logout') }}">{{trans('menu.logout')}}</a></li>
 							</ul>
 						</li>
 					@endif
