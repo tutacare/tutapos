@@ -15,9 +15,9 @@ table td {
     </div>
     <div class="row">
         <div class="col-md-12">
-            Customer: {{ $sales->customer->name}}<br />
-            Sale ID: SALE{{$saleItemsData->sale_id}}<br />
-            Employee: {{$sales->user->name}}<br />
+            {{trans('sale.customer')}}: {{ $sales->customer->name}}<br />
+            {{trans('sale.sale_id')}}: SALE{{$saleItemsData->sale_id}}<br />
+            {{trans('sale.employee')}}: {{$sales->user->name}}<br />
         </div>
     </div>
     <div class="row">
@@ -25,10 +25,10 @@ table td {
             <div class="table-responsive">
            <table class="table">
                 <tr>
-                    <td>Item</td>
-                    <td>Price</td>
-                    <td>Qty</td>
-                    <td>Total</td>
+                    <td>{{trans('sale.item')}}</td>
+                    <td>{{trans('sale.price')}}</td>
+                    <td>{{trans('sale.qty')}}</td>
+                    <td>{{trans('sale.total')}}</td>
                 </tr>
                 @foreach($saleItems as $value)
                 <tr>
@@ -44,7 +44,7 @@ table td {
     </div>
     <div class="row">
         <div class="col-md-12">
-            Payment Type: {{$sales->payment_type}}
+            {{trans('sale.payment_type')}}: {{$sales->payment_type}}
         </div>
     </div>
     <hr class="hidden-print"/>
@@ -53,10 +53,10 @@ table td {
             &nbsp;
         </div>
         <div class="col-md-2">
-            <button type="button" onclick="printInvoice()" class="btn btn-info pull-right hidden-print">Print</button> 
+            <button type="button" onclick="printInvoice()" class="btn btn-info pull-right hidden-print">{{trans('sale.print')}}</button> 
         </div>
         <div class="col-md-2">
-            <a href="{{ url('/sales') }}" type="button" class="btn btn-info pull-right hidden-print">New Sale</a>
+            <a href="{{ url('/sales') }}" type="button" class="btn btn-info pull-right hidden-print">{{trans('sale.new_sale')}}</a>
         </div>
     </div>
 </div>

@@ -5,21 +5,21 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Reports - Receivings Report</div>
+				<div class="panel-heading">{{trans('report-receiving.reports')}} - {{trans('report-receiving.receivings_report')}}</div>
 
 				<div class="panel-body">
-<div class="well well-sm">TOTAL: {{DB::table('receiving_items')->sum('total_cost')}}</div>
+<div class="well well-sm">{{trans('report-receiving.grand_total')}}: {{DB::table('receiving_items')->sum('total_cost')}}</div>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Receiving ID</td>
-            <td>Date</td>
-            <td>Items Received</td>
-            <td>Received By</td>
-            <td>Supplied By</td>
-            <td>Total</td>
-            <td>Payment Type</td>
-            <td>Comments</td>
+            <td>{{trans('report-receiving.receiving_id')}}</td>
+            <td>{{trans('report-receiving.date')}}</td>
+            <td>{{trans('report-receiving.items_received')}}</td>
+            <td>{{trans('report-receiving.received_by')}}</td>
+            <td>{{trans('report-receiving.supplied_by')}}</td>
+            <td>{{trans('report-receiving.total')}}</td>
+            <td>{{trans('report-receiving.payment_type')}}</td>
+            <td>{{trans('report-receiving.comments')}}</td>
             <td>&nbsp;</td>
         </tr>
     </thead>
@@ -35,7 +35,7 @@
             <td>{{ $value->payment_type }}</td>
             <td>{{ $value->comments }}</td>
             <td>
-                <a class="btn btn-small btn-info" data-toggle="collapse" href="#detailedReceivings{{ $value->id }}" aria-expanded="false" aria-controls="detailedReceivings">Detail</a>
+                <a class="btn btn-small btn-info" data-toggle="collapse" href="#detailedReceivings{{ $value->id }}" aria-expanded="false" aria-controls="detailedReceivings">{{trans('report-receiving.detail')}}</a>
             </td>
         </tr>
         
@@ -43,10 +43,10 @@
                 <td colspan="9">
                     <table class="table">
                         <tr>
-                            <td>Item ID</td>
-                            <td>Item Name</td>
-                            <td>Item Received</td>
-                            <td>Total</td>
+                            <td>{{trans('report-receiving.item_id')}}</td>
+                            <td>{{trans('report-receiving.item_name')}}</td>
+                            <td>{{trans('report-receiving.item_received')}}</td>
+                            <td>{{trans('report-receiving.total')}}</td>
                         </tr>
                         @foreach(ReportReceivingsDetailed::receiving_detailed($value->id) as $receiving_detailed)
                         <tr>
