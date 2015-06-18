@@ -5,10 +5,10 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">List Items</div>
+				<div class="panel-heading">{{trans('item.list_items')}}</div>
                
 				<div class="panel-body">
-				<a class="btn btn-small btn-success" href="{{ URL::to('items/create') }}">New Item</a>
+				<a class="btn btn-small btn-success" href="{{ URL::to('items/create') }}">{{trans('item.new_item')}}</a>
 				<hr />
 @if (Session::has('message'))
 	<div class="alert alert-info">{{ Session::get('message') }}</div>
@@ -17,15 +17,15 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Item ID</td>
-            <td>UPC/EAN/ISBN</td>
-            <td>Item Name</td>
-            <td>Size</td>
-            <td>Cost Price</td>
-            <td>Selling Price</td>
-            <td>Quantity</td>
+            <td>{{trans('item.item_id')}}</td>
+            <td>{{trans('item.upc_ean_isbn')}}</td>
+            <td>{{trans('item.item_name')}}</td>
+            <td>{{trans('item.size')}}</td>
+            <td>{{trans('item.cost_price')}}</td>
+            <td>{{trans('item.selling_price')}}</td>
+            <td>{{trans('item.quantity')}}</td>
             <td>&nbsp;</td>
-            <td>Avatar</td>
+            <td>{{trans('item.avatar')}}</td>
         </tr>
     </thead>
     <tbody>
@@ -40,11 +40,11 @@
             <td>{{ $value->quantity }}</td>
             <td>
 
-                <a class="btn btn-small btn-success" href="{{ URL::to('inventory/' . $value->id . '/edit') }}">Inventory</a>
-                <a class="btn btn-small btn-info" href="{{ URL::to('items/' . $value->id . '/edit') }}">Edit</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('inventory/' . $value->id . '/edit') }}">{{trans('item.inventory')}}</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('items/' . $value->id . '/edit') }}">{{trans('item.edit')}}</a>
                 {!! Form::open(array('url' => 'items/' . $value->id, 'class' => 'pull-right')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
-                    {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
+                    {!! Form::submit(trans('item.delete'), array('class' => 'btn btn-warning')) !!}
                 {!! Form::close() !!}
             </td>
             <td>{!! Html::image(url() . '/images/items/' . $value->avatar, 'a picture', array('class' => 'thumb')) !!}</td>

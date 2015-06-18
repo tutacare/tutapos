@@ -15,9 +15,9 @@ table td {
     </div>
     <div class="row">
         <div class="col-md-12">
-            Supplier: {{ $receivings->supplier->company_name}}<br />
-            Receiving ID: RECV{{$receivingItemsData->receiving_id}}<br />
-            Employee: {{$receivings->user->name}}<br />
+            {{trans('receiving.supplier')}}: {{ $receivings->supplier->company_name}}<br />
+            {{trans('receiving.receiving_id')}}: RECV{{$receivingItemsData->receiving_id}}<br />
+            {{trans('receiving.employee')}}: {{$receivings->user->name}}<br />
         </div>
     </div>
     <div class="row">
@@ -25,10 +25,10 @@ table td {
             <div class="table-responsive">
            <table class="table">
                 <tr>
-                    <td>Item</td>
-                    <td>Price</td>
-                    <td>Qty</td>
-                    <td>Total</td>
+                    <td>{{trans('receiving.item')}}</td>
+                    <td>{{trans('receiving.price')}}</td>
+                    <td>{{trans('receiving.qty')}}</td>
+                    <td>{{trans('receiving.total')}}</td>
                 </tr>
                 @foreach($receivingItems as $value)
                 <tr>
@@ -44,7 +44,7 @@ table td {
     </div>
     <div class="row">
         <div class="col-md-12">
-            Payment Type: {{$receivings->payment_type}}
+            {{trans('receiving.payment_type')}}: {{$receivings->payment_type}}
         </div>
     </div>
     <hr class="hidden-print"/>
@@ -53,10 +53,10 @@ table td {
             &nbsp;
         </div>
         <div class="col-md-2">
-            <button type="button" onclick="printInvoice()" class="btn btn-info pull-right hidden-print">Print</button> 
+            <button type="button" onclick="printInvoice()" class="btn btn-info pull-right hidden-print">{{trans('receiving.print')}}</button> 
         </div>
         <div class="col-md-2">
-            <a href="{{ url('/receivings') }}" type="button" class="btn btn-info pull-right hidden-print">New Receiving</a>
+            <a href="{{ url('/receivings') }}" type="button" class="btn btn-info pull-right hidden-print">{{trans('receiving.new_receiving')}}</a>
         </div>
     </div>
 </div>

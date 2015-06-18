@@ -7,7 +7,7 @@ return [
 	'employees'				=> 'Pegawai',
 	'items' 				=> 'Barang',
 	'item_kits' 			=> 'Barang Paket',
-	'suppliers' 			=> 'Supplier',
+	'suppliers' 			=> 'Pemasok',
 	'receivings' 			=> 'Penerimaan',
 	'sales' 				=> 'Penjualan',
 	'reports' 				=> 'Laporan',

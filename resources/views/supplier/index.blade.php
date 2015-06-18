@@ -5,10 +5,10 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">List Suppliers</div>
+				<div class="panel-heading">{{trans('supplier.list_suppliers')}}</div>
 
 				<div class="panel-body">
-				<a class="btn btn-small btn-success" href="{{ URL::to('suppliers/create') }}">New Supplier</a>
+				<a class="btn btn-small btn-success" href="{{ URL::to('suppliers/create') }}">{{trans('supplier.new_supplier')}}</a>
 				<hr />
 @if (Session::has('message'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
@@ -17,12 +17,12 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Company Name</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Phone Number</td>
+            <td>{{trans('supplier.company_name')}}</td>
+            <td>{{trans('supplier.name')}}</td>
+            <td>{{trans('supplier.email')}}</td>
+            <td>{{trans('supplier.phone_number')}}</td>
             <td>&nbsp;</td>
-            <td>Avatar</td>
+            <td>{{trans('supplier.avatar')}}</td>
         </tr>
     </thead>
     <tbody>
@@ -34,10 +34,10 @@
             <td>{{ $value->phone_number }}</td>
             <td>
 
-                <a class="btn btn-small btn-info" href="{{ URL::to('suppliers/' . $value->id . '/edit') }}">Edit</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('suppliers/' . $value->id . '/edit') }}">{{trans('supplier.edit')}}</a>
                 {!! Form::open(array('url' => 'suppliers/' . $value->id, 'class' => 'pull-right')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
-                    {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
+                    {!! Form::submit(trans('supplier.delete'), array('class' => 'btn btn-warning')) !!}
                 {!! Form::close() !!}
             </td>
             <td>{!! Html::image(url() . '/images/suppliers/' . $value->avatar, 'a picture', array('class' => 'thumb')) !!}</td>

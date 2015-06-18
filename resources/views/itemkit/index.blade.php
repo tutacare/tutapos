@@ -5,10 +5,10 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Item Kits</div>
+				<div class="panel-heading">{{trans('itemkit.item_kits')}}</div>
 
 				<div class="panel-body">
-				<a class="btn btn-small btn-success" href="{{ URL::to('item-kits/create') }}">New Item Kit</a>
+				<a class="btn btn-small btn-success" href="{{ URL::to('item-kits/create') }}">{{trans('itemkit.new_item_kit')}}</a>
 				<hr />
 @if (Session::has('message'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
@@ -17,11 +17,11 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Item Kit ID</td>
-            <td>Item Kit Name</td>
-            <td>Cost Price</td>
-            <td>Selling Price</td>
-            <td>Item Kit Description</td>
+            <td>{{trans('itemkit.item_kit_id')}}</td>
+            <td>{{trans('itemkit.item_kit_name')}}</td>
+            <td>{{trans('itemkit.cost_price')}}</td>
+            <td>{{trans('itemkit.selling_price')}}</td>
+            <td>{{trans('itemkit.item_kit_description')}}</td>
             <td>&nbsp;</td>
         </tr>
     </thead>
