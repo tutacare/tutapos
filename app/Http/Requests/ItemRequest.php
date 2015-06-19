@@ -33,5 +33,12 @@ class ItemRequest extends Request {
     {
         return Response::make('Sorry!',403);
     }
+    
+    public function messages()
+    {
+        return [
+            'avatar.mimes' => 'Not a valid file type. Valid types include jpeg, bmp and png.'
+        ];
+    }
 
 }

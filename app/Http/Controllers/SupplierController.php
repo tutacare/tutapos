@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Supplier;
 use App\Http\Requests\SupplierRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
+use Image;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller {
@@ -63,7 +64,11 @@ class SupplierController extends Controller {
 				$request->file('avatar')->move(
 				base_path() . '/public/images/suppliers/', $avatarName
 				);
-
+				$img = Image::make(base_path() . '/public/images/suppliers/' . $avatarName);
+				$img->resize(100, null, function ($constraint) {
+					$constraint->aspectRatio();
+				});
+				$img->save();
 				$supplierAvatar = Supplier::find($suppliers->id);
 				$supplierAvatar->avatar = $avatarName;
 	            $supplierAvatar->save();
@@ -126,7 +131,11 @@ class SupplierController extends Controller {
 			$request->file('avatar')->move(
 			base_path() . '/public/images/suppliers/', $avatarName
 			);
-
+			$img = Image::make(base_path() . '/public/images/suppliers/' . $avatarName);
+				$img->resize(100, null, function ($constraint) {
+					$constraint->aspectRatio();
+				});
+				$img->save();
 			$supplierAvatar = Supplier::find($id);
 			$supplierAvatar->avatar = $avatarName;
             $supplierAvatar->save();

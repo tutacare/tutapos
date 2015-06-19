@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Customer;
 use App\Http\Requests\CustomerRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
+use Image;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller {
@@ -63,7 +64,11 @@ class CustomerController extends Controller {
 					$request->file('avatar')->move(
 					base_path() . '/public/images/customers/', $avatarName
 					);
-
+					$img = Image::make(base_path() . '/public/images/customers/' . $avatarName);
+					$img->resize(100, null, function ($constraint) {
+    					$constraint->aspectRatio();
+					});
+					$img->save();
 					$customerAvatar = Customer::find($customers->id);
 					$customerAvatar->avatar = $avatarName;
 		            $customerAvatar->save();
@@ -124,7 +129,11 @@ class CustomerController extends Controller {
 					$request->file('avatar')->move(
 					base_path() . '/public/images/customers/', $avatarName
 					);
-
+					$img = Image::make(base_path() . '/public/images/customers/' . $avatarName);
+					$img->resize(100, null, function ($constraint) {
+    					$constraint->aspectRatio();
+					});
+					$img->save();
 					$customerAvatar = Customer::find($id);
 					$customerAvatar->avatar = $avatarName;
 		            $customerAvatar->save();

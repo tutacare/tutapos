@@ -6,6 +6,7 @@ use App\Item;
 use App\Inventory;
 use App\Http\Requests\ItemRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session;
+use Image;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller {
@@ -72,7 +73,11 @@ class ItemController extends Controller {
 				$request->file('avatar')->move(
 				base_path() . '/public/images/items/', $avatarName
 				);
-
+				$img = Image::make(base_path() . '/public/images/items/' . $avatarName);
+				$img->resize(100, null, function ($constraint) {
+					$constraint->aspectRatio();
+				});
+				$img->save();
 				$itemAvatar = Item::find($items->id);
 				$itemAvatar->avatar = $avatarName;
 	            $itemAvatar->save();
@@ -139,7 +144,11 @@ class ItemController extends Controller {
 				$request->file('avatar')->move(
 				base_path() . '/public/images/items/', $avatarName
 				);
-
+				$img = Image::make(base_path() . '/public/images/items/' . $avatarName);
+				$img->resize(100, null, function ($constraint) {
+					$constraint->aspectRatio();
+				});
+				$img->save();
 				$itemAvatar = Item::find($id);
 				$itemAvatar->avatar = $avatarName;
 	            $itemAvatar->save();
