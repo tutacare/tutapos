@@ -29,7 +29,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="http://tutacare.github.io/tutapos/">TutaPOS</a>
+				<a class="navbar-brand" href="http://goo.gl/YT23la">TutaPOS</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -75,7 +75,7 @@
 
 	<footer class="footer hidden-print">
       <div class="container">
-        <p class="text-muted">You are using <a href="http://tutacare.github.io/tutapos">TutaPOS</a> v0.8-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.
+        <p class="text-muted">You are using <a href="http://goo.gl/YT23la">TutaPOS</a> v0.8-alpha by <a href="https://twitter.com/tutacare">Irfan Mahfudz Guntur</a>.
         </p>
       </div>
     </footer>

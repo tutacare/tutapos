@@ -4,7 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ReceivingTemp;
 use App\Item, App\ItemKitItem;
-use \Auth, \Redirect, \Validator, \Input, \Session, \Response;
+use DB, \Auth, \Redirect, \Validator, \Input, \Session, \Response;
 use Illuminate\Http\Request;
 
 class ReceivingTempApiController extends Controller {
@@ -41,34 +41,64 @@ class ReceivingTempApiController extends Controller {
 	 */
 	public function store()
 	{
-		$type = Input::get('type');
-		if ($type == 1)
-		{
-			$ReceivingTemps = new ReceivingTemp;
-			$ReceivingTemps->item_id = Input::get('item_id');
-			$ReceivingTemps->cost_price = Input::get('cost_price');
-			$ReceivingTemps->total_cost = Input::get('total_cost');
-			$ReceivingTemps->quantity = 1;
-			$ReceivingTemps->save();
-			return $ReceivingTemps;
-		}
-		else
-		{
-			$itemkits = ItemKitItem::where('item_kit_id', Input::get('item_id'))->get();
-			foreach($itemkits as $value)
-			{
-				$item = Item::where('id', $value->item_id)->first();	
-				$ReceivingTemps = new ReceivingTemp;
-				$ReceivingTemps->item_id = $value->item_id;
-				$ReceivingTemps->cost_price = $item->cost_price;
-				$ReceivingTemps->total_cost = $item->cost_price * $value->quantity;
-				$ReceivingTemps->quantity = $value->quantity;
-				$ReceivingTemps->save();
-				//return $ReceivingTemps;
-			}
-				return $ReceivingTemps;
-		}
+		// cek item_id sudah ada atau belum, jika sudah ada update quantity,
+		// jika belum ada tambahkan data (info@mytuta.com)
+	//	$result_item_id = ReceivingTemp::where('item_id', '=', Input::get('item_id'))->first();
+		//	if ($result_item_id === null) {
+
+				$this->newItem();
+
+
+			//			}
+			//		else
+			//	{
+						/* $ReceivingTemps = ReceivingTemp::find($result_item_id->item_id);
+						$ReceivingTemps->quantity = 5;
+						$ReceivingTemps->total_cost = 54;
+						$ReceivingTemps->save();
+						return $ReceivingTemps; */
+			//		echo "warik";
+			//	$this->updateItem();
+			//	}
 	}
+public function updateItem()
+{
+	$ReceivingTemps = ReceivingTemp::find(3);
+	$ReceivingTemps->quantity = 5;
+	$ReceivingTemps->total_cost = 54;
+	$ReceivingTemps->save();
+	return $ReceivingTemps;
+}
+public function newItem()
+{
+	$type = Input::get('type');
+	if ($type == 1)
+	{
+		$ReceivingTemps = new ReceivingTemp;
+		$ReceivingTemps->item_id = Input::get('item_id');
+		$ReceivingTemps->cost_price = Input::get('cost_price');
+		$ReceivingTemps->total_cost = Input::get('total_cost');
+		$ReceivingTemps->quantity = 1;
+		$ReceivingTemps->save();
+		return $ReceivingTemps;
+	}
+	else
+	{
+		$itemkits = ItemKitItem::where('item_kit_id', Input::get('item_id'))->get();
+		foreach($itemkits as $value)
+		{
+			$item = Item::where('id', $value->item_id)->first();
+			$ReceivingTemps = new ReceivingTemp;
+			$ReceivingTemps->item_id = $value->item_id;
+			$ReceivingTemps->cost_price = $item->cost_price;
+			$ReceivingTemps->total_cost = $item->cost_price * $value->quantity;
+			$ReceivingTemps->quantity = $value->quantity;
+			$ReceivingTemps->save();
+			//return $ReceivingTemps;
+		}
+			return $ReceivingTemps;
+	}
+}
 
 	/**
 	 * Display the specified resource.

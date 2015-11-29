@@ -33,7 +33,7 @@
                     <div class="col-md-9">
 
                         <div class="row">
-                            
+
                             {!! Form::open(array('url' => 'receivings', 'class' => 'form-horizontal')) !!}
                                 <div class="col-md-5">
                                     <div class="form-group">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                         </div>
-                           
+
                         <table class="table table-bordered">
                             <tr><th>{{trans('receiving.item_id')}}</th><th>{{trans('receiving.item_name')}}</th><th>{{trans('receiving.cost')}}</th><th>{{trans('receiving.quantity')}}</th><th>{{trans('receiving.total')}}</th><th>&nbsp;</th></tr>
                             <tr ng-repeat="newreceivingtemp in receivingtemp">
@@ -75,8 +75,8 @@
                         </table>
 
                         <div class="row">
-                            
-                            
+
+
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="total" class="col-sm-5 control-label">{{trans('receiving.amount_tendered')}}</label>
@@ -111,8 +111,8 @@
                                 </div>
                         </div>
                             {!! Form::close() !!}
-                            
-                        
+
+
 
                     </div>
 
