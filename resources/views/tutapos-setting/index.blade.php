@@ -16,8 +16,8 @@
 					{!! Form::model($tutapos_settings, array('route' => array('tutapos-settings.update', $tutapos_settings->id), 'method' => 'PUT', 'files' => true)) !!}
 
 					<div class="form-group">
-					{!! Form::label('languange', 'Languange') !!}
-					{!! Form::select('languange', array('en' => 'English', 'id' => 'Indonesia'), Input::old('languange'), array('class' => 'form-control')) !!}
+					{!! Form::label('language', 'Language') !!}
+					{!! Form::select('language', array('en' => 'English', 'id' => 'Indonesia', 'es' => 'Spanish'), Input::old('language'), array('class' => 'form-control')) !!}
 					</div>
 
 					{!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}

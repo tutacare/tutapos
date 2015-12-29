@@ -78,7 +78,7 @@ class TutaposSettingController extends Controller
     public function update($id)
     {
         $tutapos_settings = TutaposSetting::find($id);
-        $tutapos_settings->languange = Input::get('languange');
+        $tutapos_settings->languange = Input::get('language');
         $tutapos_settings->save();
 
         Session::flash('message', 'You have successfully saved settings');
