@@ -4,7 +4,7 @@ return [
 
     'list_customers' => 'Listado de Clientes',
     'new_customer' => 'Nuevo Cliente',
-    'customer_id' => 'Código',
+    'customer_id' => 'ID',
     'name' => 'Nombre',
     'email' => 'Email',
     'phone_number' => 'Teléfono',
