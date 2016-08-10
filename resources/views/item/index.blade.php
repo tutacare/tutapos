@@ -6,7 +6,7 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">{{trans('item.list_items')}}</div>
-               
+
 				<div class="panel-body">
 				<a class="btn btn-small btn-success" href="{{ URL::to('items/create') }}">{{trans('item.new_item')}}</a>
 				<hr />

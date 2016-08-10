@@ -58,7 +58,7 @@ class CustomerController extends Controller {
 	            // process avatar
 	            $image = $request->file('avatar');
 				if(!empty($image)) {
-					$avatarName = 'cus' . $customers->id . '.' . 
+					$avatarName = 'cus' . $customers->id . '.' .
 					$request->file('avatar')->getClientOriginalExtension();
 
 					$request->file('avatar')->move(
@@ -123,7 +123,7 @@ class CustomerController extends Controller {
 	            // process avatar
 	            $image = $request->file('avatar');
 				if(!empty($image)) {
-					$avatarName = 'cus' . $id . '.' . 
+					$avatarName = 'cus' . $id . '.' .
 					$request->file('avatar')->getClientOriginalExtension();
 
 					$request->file('avatar')->move(
@@ -163,7 +163,7 @@ class CustomerController extends Controller {
 		{
     		Session::flash('message', 'Integrity constraint violation: You Cannot delete a parent row');
     		Session::flash('alert-class', 'alert-danger');
-	        return Redirect::to('customers');	
+	        return Redirect::to('customers');
     	}
 	}
 
