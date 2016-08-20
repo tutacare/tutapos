@@ -21,6 +21,4 @@ Login using:
     <li>password: admin</li>
   </ul>
 
-Read: <a href="https://mytuta.com/book/tutapos-point-of-sale-menggunakan-laravel-dan-angularjs-framework/">TUTAPOS Point of Sale Menggunakan Laravel & Angularjs Framework</a>
-
-<a href='https://pledgie.com/campaigns/29431'><img alt='Click here to lend your support to: TutaPOS - TUTA Point of Sale and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/29431.png?skin_name=chrome' border='0' ></a>
+<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3PTG3H7CHFR2G'><img alt='Click here to lend your support to: TutaPOS - TUTA Point of Sale and make a donation at paypal !' src='https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif' border='0' ></a>
