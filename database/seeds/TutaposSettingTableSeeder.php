@@ -13,6 +13,8 @@ class TutaposSettingTableSeeder extends Seeder
     {
         DB::table('tutapos_settings')->insert([
             'languange' => 'en',
+            'created_at' => time(),
+            'updated_at' => time(),
         ]);
     }
 }
