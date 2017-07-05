@@ -17,8 +17,6 @@ See Demo: http://tutapos.mytuta.com<br />
 
 Login using:
   <ul>
-    <li>email: admin@tuta\.pos</li>
+    <li>email: admin@tuta.pos</li>
     <li>password: admin</li>
   </ul>
-
-<a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3PTG3H7CHFR2G'><img alt='Click here to lend your support to: TutaPOS - TUTA Point of Sale and make a donation at paypal !' src='https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif' border='0' ></a>
