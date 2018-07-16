@@ -13,7 +13,7 @@ Installation
 <li>View your application in browser</li>
 </ul>
 
-See Demo: http://tutapos.mytuta.com<br />
+See Demo: http://tutapos.irfanmg.com<br />
 
 Login using:
   <ul>
